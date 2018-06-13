@@ -20,6 +20,10 @@
     <% end %>
     <% if controller_name == 'sessions' %>
       <%= render 'layouts/navbar_login' %>
+    <% elsif controller_name == 'registrations' %>
+      <%= render 'layouts/navbar_signup' %>
+    <% elsif controller_name == 'passwords' %>
+      <%= render 'layouts/navbar_signup' %>
     <% end %>
     <%= yield %>
     <%= render 'layouts/footer' %>

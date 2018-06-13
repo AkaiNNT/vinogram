@@ -61,7 +61,10 @@ Rails.application.configure do
 
   #devise
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
-  #
+  #image_optimize
   config.assets.image_optim = false
 
+  #letter_opener
+  config.action_mailer.delivery_method = :letter_opener
+  config.action_mailer.perform_deliveries = true
 end
