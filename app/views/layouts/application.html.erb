@@ -18,7 +18,9 @@
     <% if alert %>
       <p class="alert alert-danger"><%= alert %></p>
     <% end %>
-    <%= render 'layouts/navbar' %>
+    <% if controller_name == 'sessions' %>
+      <%= render 'layouts/navbar_login' %>
+    <% end %>
     <%= yield %>
     <%= render 'layouts/footer' %>
   </body>
