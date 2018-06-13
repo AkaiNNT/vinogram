@@ -1,4 +1,4 @@
-.form-sign-in{
+.form-devise{
   .jumbotron{
     background-image: url('bg.jpg');
     background-size: cover;
@@ -6,11 +6,12 @@
     margin-bottom: 0;
   }
 
-  .btn-login{
+  .btn-devise{
     min-width: 88px;
   }
 
   .logo-form{
+    margin-left: -15px;
     width: 78px;
     height: 78px;
   }
@@ -19,11 +20,22 @@
     margin-left: -15px;
   }
 
-  @media(min-width: 767px){
+  @media(max-width: 767px){
+    a{
+      color: #fff;
+    }
+  }
+
+  @media(min-width: 768px){
     .big-screen{
       box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
       background-color: #fff;
       padding: 50px;
+    }
+    .big-screen-sign-up{
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+      background-color: #fff;
+      padding: 20px 50px;
     }
   }
 }
