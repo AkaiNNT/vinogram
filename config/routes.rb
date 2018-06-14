@@ -5,8 +5,9 @@ Rails.application.routes.draw do
     registrations: 'users/registrations'
   }
   devise_scope :user do
-    get '/', to: 'users/sessions#new'
+    # get '/', to: 'users/sessions#new'
   end
   get 'home/index'
   root to: "home#index"
+  resources :users
 end
