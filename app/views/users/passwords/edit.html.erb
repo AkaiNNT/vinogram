@@ -1,30 +1,32 @@
 <div class="form-devise">
-  <div class="jumbotron">
+  <div class="article container-fluid">
     <div class="row">
       <div class="col-10 offset-1 col-sm-8 offset-sm-2 col-md-6 offset-md-3 col-lg-4 offset-lg-4">
-        <div class="big-screen">
-          <div class="d-flex justify-content-center align-items-center">
-              <%= image_tag 'logo.png', class: 'logo-form'%>
-              <h2 class="text-uppercase font-weight-bold title-form">Vinogram</h2>
-          </div>
-          <br>
-            <%= simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
-              <%= f.error_notification %>
+        <div class="form-wrapper">
+          <div class="big-screen-form">
+            <div class="d-flex justify-content-center align-items-center">
+                <%= image_tag 'logo.png', class: 'logo-form'%>
+                <h2 class="text-uppercase font-weight-bold title-form">Vinogram</h2>
+            </div>
+            <p class="text-center">Đặt lại mật khẩu cho tài khoản của bạn</p>
+              <%= simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
+                <%= f.error_notification %>
 
-              <%= f.input :reset_password_token, as: :hidden %>
-              <%= f.full_error :reset_password_token %>
+                <%= f.input :reset_password_token, as: :hidden %>
+                <%= f.full_error :reset_password_token %>
 
-              <div class="form-inputs">
-                <%= f.input :password, label: "New password", required: true, autofocus: true, hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length) %>
-                <%= f.input :password_confirmation, label: "Confirm your new password", required: true %>
-              </div>
-              <div class="d-flex justify-content-end align-items-center">
-                <div class="form-actions">
-                  <%= f.button :submit, "Change my password", class: 'btn btn-primary btn-devise' %>
+                <div class="form-inputs">
+                  <%= f.input :password, label: "New pasword", required: true, autofocus: true, label: false, placeholder: 'Mật khẩu mới' %>
+                  <%= f.input :password_confirmation, label: "Confirm your new pasword", required: true, label: false, placeholder: 'Xác nhận mật khẩu mới' %>
                 </div>
-              </div>
-            <% end %>
-          <br>
+                <div class="d-flex justify-content-center align-items-center">
+                  <div class="form-actions">
+                    <%= f.button :submit, "Change my pasword", class: 'btn btn-primary btn-devise' %>
+                  </div>
+                </div>
+              <% end %>
+            <br>
+          </div>
         </div>
       </div>
     </div>
