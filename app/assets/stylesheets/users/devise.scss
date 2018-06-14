@@ -36,12 +36,13 @@
   }
 
   .phone-image{
-    width: 100%;
+    width:450px;
+    float: right;
   }
   .slide-image{
-      width: 240px;
-      top: 100px;
-      left: 151px;
+      width: 246px;
+      top: 97px;
+      right: 71px;
       position: absolute;
       z-index: 1000;
   }
@@ -52,15 +53,12 @@
 
   .form-column{
     padding: 0;
+    max-width: 450px;
   }
   .form-wrapper{
     margin-top: 50px;
   }
-  @media(max-width: 991px){
-    .phone-image,.slide-image{
-      display: none;
-    }
-  }
+
   @media(min-width: 450px){
     .big-screen-form{
       background-color: #fff;
