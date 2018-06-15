@@ -1,34 +1,52 @@
-<h1>Profile Information</h1>
-<hr/>
-<div class="row">
-  <div class="col-md-3"></div>
-  <div class="col-md-6">
-    <%= simple_form_for @user, url: user_path, method: :put, html: {multipart: true} do |f|%>
 
-    <div class="card" style="width:250px">
-      <%= image_tag (@user.avatar.url), :height => 300, class: "card-img-top" , id: 'blah'%>
-      <div class="card-body">
-        
-       
-        <%= f.file_field :avatar, value: 'Edit avatar', onchange: "readURL(this);"%>
+<div class="container">
+  <div class=" edit_profile">
+    <div class="row">
+      <div class="col-md-3 list">
+        <div class="list-group">
+          <li  class="list-group-item actived"><%= link_to 'Edit Profile', edit_user_path(@user)%></li>
+          <li class="list-group-item"><%= link_to 'Change Password', edit_user_registration_path(@user) %></li>
+        </div>
       </div>
-    </div>
-    <div class="form-inputs">
-      <%= f.input :contact_number, required: true, autofocus: true %>
-      <%= f.input :description, required: false%>
-    </div>
+      <div class="col-md-9 article">
+        <%= simple_form_for @user, url: user_path, method: :put, html: {multipart: true} do |f|%>
+         <div class="form_input">
+        <div class="row row_avatar">
+          <div class="col-md-3 avatar_img">
+          <%= image_tag (@user.avatar.url),id: 'blah'%>
+            <%= f.file_field :avatar, value: 'Edit avatar', id: 'edit_avatar', onchange: "readURL(this);"%>
+          </div>
+          <div class="col-md-9">
+            <h4><%= @user.email %></h4>
+         </div>
+       </div>   
 
-    <div class="form-actions">
-      <%= f.button :submit, "Update" %>
-    </div>
+      
+        <div class="row row_input">
+          <div class="col-md-3"><%= f.label 'Phone' , class: 'label'%></div>
+          <div class="col-md-9 "><%= f.input_field :contact_number, required: true, autofocus: true, class: 'input_field' %></div>
+        </div>
+        <div class="row row_input">
+          <div class="col-md-3"><%= f.label :description, class: 'label'%></div>
+          <div class="col-md-9 "><%= f.input_field :description, required: false, class: 'input_field' %></div>
+        </div>
 
-    <%= link_to 'Change password', edit_user_registration_path(@user)%>
-    <% end %>
+        <div class="row row_input">
+          <div class="col-md-3"></div>
+          <div class="col-md-9">
+             <%= f.button :submit, "Update", class: 'btn small-btn btn-primary' %>
+          </div>
+        </div>
+      </div>
+      <% end %>
+    </div>
   </div>
-  <div class="col-md-3"></div>
 </div>
-
+</div>
 <script type="text/javascript">
+  $( "#blah" ).click(function() {
+    $( "#edit_avatar" ).click();
+  });
   function readURL(input) {
     if (input.files && input.files[0]) {
       var reader = new FileReader();
@@ -36,8 +54,8 @@
       reader.onload = function (e) {
         $('#blah')
         .attr('src', e.target.result)
-        .width(250)
-        .height(300);
+        .width(40)
+        .height(40);
       };
 
       reader.readAsDataURL(input.files[0]);
