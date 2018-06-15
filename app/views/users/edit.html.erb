@@ -6,7 +6,7 @@
     <%= simple_form_for @user, url: user_path, method: :put, html: {multipart: true} do |f|%>
 
     <div class="card" style="width:250px">
-      <%= image_tag (@user.get_avatar), :height => 300, class: "card-img-top" %>
+      <%= image_tag (@user.avatar.url), :height => 300, class: "card-img-top" %>
       <div class="card-body">
         <%= f.file_field :avatar%>
       </div>
