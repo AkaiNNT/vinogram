@@ -1,4 +1,39 @@
-<div class="nested-fields">
-	<%= f.file_field :image%>
+<div class="nested-fields col-6 col-md-4 col-lg-3">
+	<div class="logo_uploader">
+    <% if f.object.image.present? %>
+      <img src="<%= f.object.image.url %>" alt="img" class='image-upload'>
+    <% else %>
+      <%= image_tag "upload.png", class: 'logo'%>
+    <% end %>
+	</div>
+	<%= f.file_field :image, class: 'image_uploader d-none'%>
   <%= link_to_remove_association "remove", f %>
 </div>
+
+<script type="text/javascript">
+  $(function() {
+    var imagesPreview = function(input) {
+      if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function(event) {
+          $(input)
+          .closest('.nested-fields')
+          .find('img')
+          .attr('src', event.target.result)
+          .css('width','150px')
+          .css('height', '100px');
+        }
+        reader.readAsDataURL(input.files[0]);
+      }
+    };
+    $('.image_uploader').off();
+    $('.image_uploader').on('change', function() {
+      $('.previewer').removeClass('d-none');
+      imagesPreview(this);
+    });
+  });
+  $('.logo_uploader').off();
+  $('.logo_uploader').click(function() {
+    $(this).closest('.nested-fields').find('.image_uploader').click();
+  });
+</script>

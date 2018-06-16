@@ -1,0 +1,33 @@
+<section>
+	<div class="row">
+		<div class="col-lg-8 offset-lg-2 col-10 offset-1 ">
+			<div class="card">
+				<div class="card-body form-show-post">
+					<header class="row">
+						<div class="col-sm-2 col-md-2 col-lg-1 col-2">
+							<div class="thumbnail profile-post">
+								<%= image_tag post.user.avatar.url, :alt => "rss feed", :class => "img-thumbnail img-fluid rounded-circle rounded "%>
+							</div>
+			      </div>
+						<div class="col-sm-10 col-md-10 col-lg-11 col-10">
+							<%= link_to post.user.full_name, user_path(post.user), :class => "name-user", :'data-toggle' => :tooltip, :title => post.created_at.strftime("At %r")%>
+						</div>
+					</header>
+					<div class="row">
+						<%= link_to image_tag(post.pictures.first.image.url, :class => "img-thumbnail"), post.pictures.first.image.url, "data-toggle": "gallery" ,"data-gallery": "example-gallery"%>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<br>
+<div class="row">
+	<%# if post.pictures.present? %>
+	  <% post.pictures.where.not(id: post.pictures.first.id).each_with_index do |pic,index| %>
+	  	<div class="col-md-4">
+	  		<%= link_to image_tag(pic.image.url, :class => "img-thumbnail d-none"), pic.image.url, "data-toggle": "gallery", "data-gallery": "example-gallery" %>
+	  	</div>
+	  <% end %>
+  <%# end %>
+</div>
