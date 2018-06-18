@@ -1,0 +1,74 @@
+<div class="show_profile">
+  <section class="header">
+    <%= simple_form_for @user, url: user_path, method: :put, html: {multipart: true} do |f|%>
+    <div class="row">
+      <div class="col-md-4 ">
+        <div class="avatar_img">
+         <%= image_tag (@user.avatar.url),id: 'blah'%>
+         <%= f.file_field :avatar, value: 'Edit avatar', id: 'edit_avatar', onchange: "readURL(this);"%>
+       </div>
+     </div>
+
+     <div class="col-md-8">
+      <div class="row">
+       <h4><%= @user.email %></h4>
+       <div class="edit_profile_link">
+         <%= link_to 'Edit Profile', edit_user_path(@user), class: 'button'%>
+       </div>
+     </div>
+     <div class="row info">
+       <ul>
+         <li><strong>69</strong> posts</li>
+         <li><strong>100</strong> follower</li>
+         <li><strong>62</strong> following</li>
+       </ul>
+     </div>
+     <div class="row">
+       <strong><%= @user.full_name%>: </strong> <%= @user.description%>
+     </div>
+   </div>
+ </div>
+ <%end%>
+</section>
+<section class="user_post">
+  <hr>
+  <div class="title">
+    <h7>SHOW ALL POSTS</h7>
+  </div>
+  <div class="posts row">
+    <div class="col-md-4">
+      <button type="button" class="modal_btn" data-toggle="modal" data-target="#exampleModal">
+        <%= image_tag 'default_images.jpeg', class: 'post_img'%>
+      </button>
+      <!-- start modal-->
+      <%= render 'modal_show' %>
+      <!-- end modal -->
+    </div>
+    <div class="col-md-4"><%= image_tag 'default_images.jpeg', class: 'post_img'%></div>
+    <div class="col-md-4"><%= image_tag 'default_images.jpeg', class: 'post_img'%></div>
+    </div>
+
+
+  </section>
+
+</div>
+
+<script type="text/javascript">
+  $( "#blah" ).click(function() {
+    $( "#edit_avatar" ).click();
+  });
+  function readURL(input) {
+    if (input.files && input.files[0]) {
+      var reader = new FileReader();
+
+      reader.onload = function (e) {
+        $('#blah')
+        .attr('src', e.target.result)
+        .width(150)
+        .height(150);
+      };
+
+      reader.readAsDataURL(input.files[0]);
+    }
+  }
+</script>
