@@ -15,7 +15,5 @@ Rails.application.routes.draw do
     passwords: 'admins/passwords',
     registrations: 'admins/registrations'
   }
-  devise_scope :user do
-    get '/cms', to: 'admins/sessions#new'
-  end
+
 end
