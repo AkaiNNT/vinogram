@@ -1,4 +1,5 @@
 class PostsController < ApplicationController
+  before_action :set_post ,only: [:update, :edit, :destroy]
   def new
     @post = Post.new
   end
@@ -28,12 +29,9 @@ class PostsController < ApplicationController
     end
   end
 
-  def edit
-    @post = Post.find_by(id: params[:id])
-  end
+  def edit;  end
 
   def update
-    @post = Post.find_by(id: params[:id])
     if @post.update_attributes(post_params)
       redirect_to root_path
     else
@@ -41,10 +39,19 @@ class PostsController < ApplicationController
     end
   end
 
+  def destroy
+    @post.destroy
+    redirect_to posts_path
+  end
+
   private
 
+  def set_post
+    @post = current_user.posts.find(params[:id])
+  end
+
   def post_params
-      params.required(:post).permit(:content, pictures_attributes: [:id, :image])
+      params.required(:post).permit(:content,:attachment, pictures_attributes: [:id, :image])
   end
 
 end
