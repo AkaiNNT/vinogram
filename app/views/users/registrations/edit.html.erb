@@ -4,12 +4,13 @@
     <div class="row">
       <div class="col-md-3 list">
         <div class="list-group">
-          <li  class="list-group-item actived"><%= link_to 'Edit Profile', edit_user_path(@user)%></li>
-          <li class="list-group-item"><%= link_to 'Change Password', edit_user_registration_path(@user) %></li>
+          <li class="list-group-item"><%= link_to 'Edit Profile', edit_user_path(@user)%></li>
+          <li class="list-group-item actived"><%= link_to 'Change Password', edit_user_registration_path(@user)%></li>
         </div>
       </div>
       <div class="col-md-9 article">
-        <%= simple_form_for @user, url: user_path, method: :put, html: {multipart: true} do |f|%>
+        <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+     <%= f.error_notification %>
          <div class="form_input">
         <div class="row row_avatar">
           <div class="col-md-3 avatar_img">
@@ -23,14 +24,17 @@
 
       
         <div class="row row_input">
-          <div class="col-md-3"><%= f.label 'Phone' , class: 'label'%></div>
-          <div class="col-md-9 "><%= f.input_field :contact_number, required: true, autofocus: true, class: 'input_field' %></div>
+          <div class="col-md-3"><%= f.label 'Old Password' , class: 'label'%></div>
+          <div class="col-md-9 "><%= f.input_field :current_password, autocomplete: "off", hint: "we need your current password to confirm your changes", required: true, class: 'input_field' %></div>
         </div>
         <div class="row row_input">
-          <div class="col-md-3"><%= f.label :description, class: 'label'%></div>
-          <div class="col-md-9 "><%= f.input_field :description, required: false, class: 'input_field' %></div>
+          <div class="col-md-3"><%= f.label :password, class: 'label'%></div>
+          <div class="col-md-9 "><%= f.input_field :password , hint: "leave it blank if you don't want to change it", required: false, class: 'input_field' %></div>
         </div>
-
+         <div class="row row_input">
+          <div class="col-md-3"><%= f.label :description, class: 'label'%></div>
+          <div class="col-md-9 "><%= f.input_field :password_confirmation, required: false, class: 'input_field' %></div>
+        </div>
         <div class="row row_input">
           <div class="col-md-3"></div>
           <div class="col-md-9">
@@ -38,6 +42,8 @@
           </div>
         </div>
       </div>
+
+<!--      <%#= link_to "Back", :back %> -->
       <% end %>
     </div>
   </div>

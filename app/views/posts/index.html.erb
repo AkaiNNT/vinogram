@@ -1,5 +1,13 @@
 <div class="container">
-	<div class="row">
 		<%= render "create_post" %>
-	</div>
+		<br>
+		<%= render @posts %>
+		<%= will_paginate @posts %>
 </div>
+
+<script type="text/javascript">
+	$(document).on('click', '[data-toggle="gallery"]', function(event) {
+                event.preventDefault();
+                $(this).ekkoLightbox();
+            });
+</script>

@@ -3,9 +3,14 @@ class PostsController < ApplicationController
     @post = Post.new
   end
 
+  def show
+    @post = Post.find(params[:id])
+  end
+
   def index
     @post = Post.new
-    @posts = Post.all
+    @posts = Post.all.order('created_at desc').paginate(:page => params[:page], :per_page => 6 )
+
   end
   
   def create
@@ -18,8 +23,8 @@ class PostsController < ApplicationController
       end
       redirect_to posts_path
     else
-      flash[:warning] = @post.errors.full_messages.join(", ")
-      render :new
+      flash[:danger] = @post.errors.full_messages.join(", ")
+      redirect_to posts_path
     end
   end
 
