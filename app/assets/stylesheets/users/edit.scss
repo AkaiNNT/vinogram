@@ -1,5 +1,6 @@
+@import './base/variable';
 .edit_profile {
-  padding: 100px 100px 10px 100px;
+  padding: $primary-padding;
 
   .list{
     border: 1px solid rgba(0, 0, 0, 0.125);
@@ -15,7 +16,6 @@
 
      .list-group-item{
       border: none !important;
-/*      padding: 20px 20px 0px 20px;*/
       padding: 16px 16px 16px 30px;
       a{
         color: black !important;

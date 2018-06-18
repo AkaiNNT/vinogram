@@ -1,0 +1,60 @@
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog post_modal" role="document">
+      <div class="modal-content">
+        <div class="row">
+          <div class="col-md-8">
+            <%= image_tag 'default_images.jpeg', class: 'post_img'%>
+          </div>
+          <div class="col-md-4">
+            <div class="modal-header">
+              <div class="modal-title" id="exampleModalLabel">
+                <div class="">
+                 <%= image_tag (@user.avatar.url),id: 'avatar_img_modal'%>
+                 <strong><%= @user.email %></strong>
+               </div>
+               
+             </div>
+             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <!-- show all comments of this post -->
+            fsffjdsfjsljfls
+            <!-- end -->
+
+            <div class="footer">
+              <div class="modal-footer footer_liked_follower">
+                <div class="row">
+                  <div class="col-md-12">
+                    <ul>
+                      <li class="li_left"><i class="fa fa-heart-o" aria-hidden="true"></i></li>
+                      <li class="li_left"><i class="fa fa-comment-o" aria-hidden="true"></i></li>
+                      <li class="li_right"><i class="fa fa-bookmark-o" aria-hidden="true"></i></li>
+                    </ul> 
+                  </div>
+                  <div class="col-md-12">
+                    <!-- show all follower who liked this post -->
+                    bap_sang, rospham, phuc9898_, nguyenthimytoan, victorhuynhquang and baotrung.nguyenphuoc like this
+                  </div>
+                </div>
+              </div>
+              <div class="modal-footer" style="display: -moz-box;">
+                <!-- add comment for this post-->
+
+                <%= simple_form_for @user do |f| %>
+                <%= f.text_field :description, as: :text, placeholder: 'Add the comment', class: 'comment_field' %>
+                <i class="fa fa-ellipsis-h"></i>
+                <%end%>
+              </div>
+            </div>
+            <!-- end 'add comment for this post'-->
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+
+  </div>
+</div>
