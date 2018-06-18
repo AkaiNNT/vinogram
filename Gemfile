@@ -41,6 +41,8 @@ gem 'bootstrap', '4.1.1'
 
 gem 'jquery-rails', '4.3.3'
 
+gem 'jquery-ui-rails'
+
 gem 'devise', '4.4.3'
 
 gem "cocoon", '1.2.11'

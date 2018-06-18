@@ -10,10 +10,13 @@ Rails.application.routes.draw do
   get 'home/index'
   root to: "home#index"
   resources :users
-  devise_for :admins, path: 'admins', controllers: {
-    sessions: 'admins/sessions',
-    passwords: 'admins/passwords',
-    registrations: 'admins/registrations'
-  }
+
+  devise_for :admins, controllers: {
+    sessions: 'admins/sessions'
+  }, :sign_out_via => [ :get ]
+
+  namespace :admins do
+    root to: 'dashboards#index'
+  end
 
 end

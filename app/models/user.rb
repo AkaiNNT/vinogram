@@ -10,6 +10,7 @@ class User < ApplicationRecord
 
   validates :contact_number,
   :numericality => true,
-  :length => { :minimum => 10, :maximum => 15 }
+  :length => { :minimum => 10, :maximum => 15 },
+  :allow_nil => true
 
 end
