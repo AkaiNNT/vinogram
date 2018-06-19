@@ -1,39 +1,7 @@
-body{
-  background-color: #efefef;
-}
-.page-wrapper{
-  margin-top: 5
-}
-
-.sidebar{
-  width: 100%;
-  padding: 0;
-  height: 100vh;
-  background-color: #272727;
-  margin: 0;
-}
-
-.nav-link{
-  color: #9d9d9d;
-  padding: 1rem 1.5rem;
-}
-
-.content{
-  width: 100%;
-  margin-left: 240px;
-  overflow: none;
-}
-
-.main-containe{
-  min-height: 100vh;
-}
-
-.btn-link{
-  color: black;
-}
-
-@media(max-width: 732px){
-  .hid-text{
-    display: none;
+.main-cms{
+  min-height: 95vh;
+  background-color: #fafafa;
+  .statistic{
+    height: 150px;
   }
 }

@@ -13,4 +13,7 @@ class User < ApplicationRecord
   :length => { :minimum => 10, :maximum => 15 },
   :allow_nil => true
 
+  validates :full_name, :presence => true
+  validates :full_name, :length => { :minimum => 3 },if: -> { self.full_name.present? }
+
 end

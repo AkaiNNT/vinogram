@@ -16,7 +16,9 @@ Rails.application.routes.draw do
   }
 
   namespace :admins do
+    resources :users
+    resources :posts
+    resources :comments
     root to: 'dashboards#index'
   end
-
 end

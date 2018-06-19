@@ -18,16 +18,16 @@
     <% if alert %>
       <p class="alert alert-danger"><%= alert %></p>
     <% end %>
-    <% if controller_name == "dashboards" %>
-      <%= render 'layouts/navbar_dashboards' %>
-    <% end %>
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-3 col-xl-2 p-0">
+    <%= render 'layouts/navbar_dashboards' %>
+    <div class="container-fluid h-100">
+      <div class="row h-100">
+        <aside class="col-12 col-md-3 col-lg-2 p-0 bg-dark">
           <%= render 'layouts/sidebar' %>
-        </div>
-        <div class="col-9 col-xl-10 ">
-          <%= yield %>
+        </aside>
+        <div class="col-12 col-md-9 col-lg-10 main-cms">
+          <div class="col bg-faded py-3 h-100">
+            <%= yield %>
+          </div>
         </div>
       </div>
     </div>

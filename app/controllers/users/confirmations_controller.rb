@@ -2,6 +2,8 @@
 
 class Users::ConfirmationsController < Devise::ConfirmationsController
   # GET /resource/confirmation/new
+  include Accessible
+  skip_before_action :check_user, only: :destroy
   # def new
   #   super
   # end

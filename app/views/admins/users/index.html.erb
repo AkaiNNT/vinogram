@@ -1,0 +1,37 @@
+<h3>List of User</h3>
+<div class="container-fluid">
+  <div class="table-responsive">
+    <table class="table table-striped">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">Id</th>
+          <th scope="col">Email</th>
+          <th scope="col">Avatar</th>
+          <th scope="col">Full Name</th>
+          <th scope="col">Contact Number</th>
+          <th scope="col">Description</th>
+          <th scope="col">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% if @users.count > 0 %>
+          <% @users.each do |u| %>
+            <tr>
+              <th scope="row"><%= u.id %></th>
+              <td><%= u.email %></td>
+              <td><%= image_tag u.avatar.url(:thumb), class: 'avatar-user' %></td>
+              <td><%= u.full_name %></td>
+              <td><%= u.contact_number %></td>
+              <td><%= u.description %></td>
+              <td><%= link_to 'Show', admins_user_path(u), method: :get %> | <%= link_to 'Edit', edit_admins_user_path(u) %> | <%= link_to 'Delete', admins_user_path(u),method: :delete %> </td>
+            </tr>
+          <% end %>
+        <% else %>
+          <tr>
+            <td colspan="7">No One use your vinogram. Poor you :( .</td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
