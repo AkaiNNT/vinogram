@@ -18,6 +18,9 @@
     <% if alert %>
       <p class="alert alert-danger"><%= alert %></p>
     <% end %>
+    <% if controller_name == "users"%>
+    <%= render 'layouts/navbar_user'%>
+    <% end %>
     <% if controller_name == "dashboards" %>
       <%= render 'layouts/navbar_dashboards' %>
     <% end %>

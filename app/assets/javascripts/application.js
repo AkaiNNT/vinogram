@@ -18,4 +18,5 @@
 //= require popper
 //= require bootstrap-sprockets
 //= require cocoon
+//= require users/notification_dropdown
 
