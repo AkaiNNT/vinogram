@@ -1,0 +1,38 @@
+<%= simple_form_for @post do |f| %>
+  <div class="form-inputs">
+    <%= f.input :content, label: false, required: true, autofocus: true, placeholder: "What's on your mind today?" %>
+  </div>
+  <div class="form-actions">
+  	<div class="row" id="add-cocoon">
+			<div id="video-demo-container" class="d-none">
+				<video id="main-video" controls>
+					<source type="video/mp4">
+				</video>
+			</div>
+		</div>
+		<div class="eventUploadVideo">
+	  	<%= f.file_field :attachment,id: "file-to-upload" , class: "d-none" %>
+		</div>
+		<div class="links">
+	    <%= link_to_add_association '<button type="button" class="btn btn-default" id="btn-upload-img"><i class="fa fa-camera"></i></button>'.html_safe, f, :pictures, id: 'link-add-pic' %>
+
+	    <button type="button" class="btn btn-default" id="upload-button" ><i class="fa fa-video-camera"></i><label class="text-right"></label></button>
+	  	<%= f.button :submit, "Post" , :class => "btn btn-outline-primary btn-post"%>
+	  </div>
+  </div>
+<% end %>
+<% flash.each do |key, value| %>
+  <div class="row">
+    <div class="alert alert-<%= key %>">
+      <%= value %>
+    </div>
+  </div>
+<% end %>
+
+<script type="text/javascript">
+	  $(document).ready(function() {
+    $("#link-add-pic").
+      data("association-insertion-method", 'append').
+      data("association-insertion-node", '#add-cocoon');
+  });
+</script>

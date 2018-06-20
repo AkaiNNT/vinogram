@@ -10,34 +10,7 @@
 							</div>
 			      </div>
 						<div class="col-sm-10 col-md-10 col-lg-11 col-10">
-							<%= simple_form_for @post do |f| %>
-							  <div class="form-inputs">
-							    <%= f.input :content, label: false, required: true, autofocus: true, placeholder: "What's on your mind today?" %>
-							  </div>
-							  <div class="form-actions">
-							  	<div class="row" id="add-cocoon">
-
-										<div id="preview" class="d-none"><img src=""></div>
-
-									</div>
-									<div class="eventUploadVideo">
-								  	<%= f.file_field :attachment,id: "inputVideo" , class: "d-none" %>
-									</div>
-									<div class="links">
-								    <%= link_to_add_association '<button type="button" class="btn btn-default"><i class="fa fa-camera"></i></button>'.html_safe, f, :pictures, id: 'link-add-pic' %>
-
-								    <button type="button" class="btn btn-default" onClick="addVideo()" ><i class="fa fa-video-camera"></i><label class="text-right"></label></button>
-								  	<%= f.button :submit, "Post" , :class => "btn btn-outline-primary btn-post"%>
-								  </div>
-							  </div>
-							<% end %>
-							<% flash.each do |key, value| %>
-				        <div class="row">
-				          <div class="alert alert-<%= key %>">
-				            <%= value %>
-				          </div>
-				        </div>
-				      <% end %>
+							<%= render 'form_create_post'%>
 						</div>
 					</div>
 				</div>
@@ -47,29 +20,41 @@
 </section>
 
 <script type="text/javascript">
-  $(document).ready(function() {
-    $("#link-add-pic").
-      data("association-insertion-method", 'append').
-      data("association-insertion-node", '#add-cocoon');
-  });
+ //////////////////////////PREVIEW VIDEO//////////////////////////////////
+	var _VIDEO = document.querySelector("#main-video");
 
-  function addVideo() {
-	  $("#inputVideo").click()
-	}
-
-	function readURL(input){
-		if (input.files && input.files[0]) {
-			var reader = new FileReader();
-			reader.onload = function (e){
-				console.log(e.target)
-				$('#preview img').attr('src', e.target.result).css('width','150px')
-          .css('height', '100px');;
-			};
-			reader.readAsDataURL(input.files[0]);
-		}
-	}
-	$('.eventUploadVideo').on('change','input[type="file"]',function(){
-		$('#preview').removeClass('d-none');
-		readURL(this);
+	document.querySelector("#upload-button").addEventListener('click', function() {
+		document.querySelector("#file-to-upload").click();
 	});
+
+	// When user chooses a MP4 file
+	document.querySelector("#file-to-upload").addEventListener('change', function() {
+		// Validate whether MP4
+    if(['video/mp4'].indexOf(document.querySelector("#file-to-upload").files[0].type) == -1) {
+        alert('Error : Only MP4 format allowed');
+        return;
+    }
+
+		// Object Url as the video source
+		document.querySelector("#main-video source").setAttribute('src', URL.createObjectURL(document.querySelector("#file-to-upload").files[0]));
+		
+		// Load the video and show it
+		$('#video-demo-container').removeClass('d-none');
+		$('.image_uploader').val(null);
+		$('.nested-fields').addClass('d-none');
+		_VIDEO.load();
+		_VIDEO.style.display = 'inline';
+		
+		// Load metadata of the video to get video duration and dimensions
+		_VIDEO.addEventListener('loadedmetadata', function() { console.log(_VIDEO.duration);
+	    var video_duration = _VIDEO.duration,
+			  	duration_options_html = '';
+		});
+	});
+	document.querySelector("#btn-upload-img").addEventListener('click', function() {
+		document.getElementById('file-to-upload').value = '';
+		$("#video-demo-container").addClass('d-none');
+		$("#btn-close-video").addClass('d-none');
+	});
+
 </script>

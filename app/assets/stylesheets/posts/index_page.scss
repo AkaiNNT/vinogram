@@ -43,6 +43,16 @@
     height: 100px;
   }
 
+  #video-demo-container {
+		width: 100px;
+		margin: 5px 20px;
+	}
+
+	#main-video {
+		display: none;
+		max-width: 250px;
+	}
+
 }
 
 .form-show-post{
@@ -67,8 +77,18 @@
 	}
 
 	video{
-		margin-top: -35px;
+		margin-top: -15px;
+	}
+	
+	.img-post img{
+		max-height: 500px;
+		vertical-align: middle;
+		border-style: none;
+
 	}
 
+	.icon-comment{
+		margin-left: 10px;
+	}
 
 }

@@ -1,0 +1,35 @@
+<section class="img_or_video">
+	<%if post.pictures.present? %>
+		<div id="carousel_<%=post.id%>" class="carousel slide" data-ride="carousel">
+			<div class="row">
+			  <div class="carousel-inner">
+					<% post.pictures.each_with_index do |pic, index| %>
+				  	<% if index == 0 %>
+					    <div class="carousel-item active">
+					      <%= image_tag(pic.image.url, :class => "d-block w-100 img-post")%>
+					    </div>
+					  <% else %>
+					    <div class="carousel-item">
+						    <%= image_tag(pic.image.url, :class => "d-block w-100 img-post")%>
+					    </div>
+					  <% end %>
+					<% end %>
+			  </div>
+			 	<% if post.pictures.count >= 2 %> 
+				  <a class="carousel-control-prev" href="#carousel_<%=post.id%>" role="button" data-slide="prev">
+				    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+				    <span class="sr-only">Previous</span>
+				  </a>
+				  <a class="carousel-control-next" href="#carousel_<%=post.id%>" role="button" data-slide="next">
+				    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+				    <span class="sr-only">Next</span>
+				  </a>
+				<% end %>
+			</div>
+		</div>
+	<% else %>
+		<div class="row">
+			<%= video_tag post.attachment.url(:medium), controls: true,type: 'video/mp4', style: "max-width: 100%;" %>
+		</div>
+	<% end %>
+</section>
