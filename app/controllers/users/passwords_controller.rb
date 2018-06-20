@@ -3,6 +3,7 @@
 class Users::PasswordsController < Devise::PasswordsController
   # GET /resource/password/new
   include Accessible
+  skip_before_action :check_user, only: :edit
   def new
     super
   end

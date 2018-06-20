@@ -5,7 +5,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # before_action :configure_account_update_params, only: [:update]
   # GET /resource/sign_up
   include Accessible
-  skip_before_action :check_user, only: :destroy
+  skip_before_action :check_user, only: [ :destroy,:edit ]
   def new
     super
   end
