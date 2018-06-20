@@ -15,7 +15,7 @@
               <%= f.file_field :avatar, value: 'Edit avatar', id: 'edit_avatar', onchange: "readURL(this);"%>
             </div>
             <div class="col-md-9">
-              <h4><%= @user.email %></h4>
+              <h4><%= @user.full_name %></h4>
             </div>
           </div>   
 
@@ -36,7 +36,9 @@
            </div>
          </div>
        </div>
+        <%= f.error_notification message: 'Look like phone number may be incorrect'%>
        <% end %>
+
      </div>
    </div>
  </div>

@@ -1,32 +1,39 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Vinogram</title>
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <%= favicon_link_tag 'logo.png' %>
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-  </head>
+<head>
+  <title>Vinogram</title>
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <%= favicon_link_tag 'logo.png' %>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+</head>
 
-  <body>
-    <% if notice %>
-      <p class="alert alert-success"><%= notice %></p>
-    <% end %>
-    <% if alert %>
-      <p class="alert alert-danger"><%= alert %></p>
-    <% end %>
-    <% if controller_name == "users"%>
-    <%= render 'layouts/navbar_user'%>
-    <% end %>
-    <% if controller_name == "dashboards" %>
-      <%= render 'layouts/navbar_dashboards' %>
-    <% end %>
-    <%= yield %>
-    <% if controller_name != 'sessions'%>
-      <%= render 'layouts/footer' %>
-    <% end %>
-  </body>
+<body>
+
+  <% if controller_name == "users"%>
+  <%= render 'layouts/navbar_user'%>
+  <% end %>
+  <% if controller_name == "dashboards" %>
+  <%= render 'layouts/navbar_dashboards' %>
+  <% end %>
+  <%= yield %>
+  <% if notice %>
+  <p class="alert alert-success">
+    <%= notice %>
+    <button class="close" data-dismiss="alert">x</button>
+  </p>
+  <% end %>
+  <% if alert %>
+  <p class="alert alert-danger">
+    <%= alert %>
+    <button class="close" data-dismiss="alert">x</button>
+  </p>
+  <% end %>
+  <% if controller_name != 'sessions'%>
+  <%= render 'layouts/footer' %>
+  <% end %>
+</body>
 </html>

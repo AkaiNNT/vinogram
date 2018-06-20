@@ -88,16 +88,15 @@ $avatar_img_modal_height: 40px;
       padding: 0px !important;
       list-style: none;
       li.li_left{
-      float:left;
-      padding-right: 20px;
-    }
-    li.li_right{
-      float:right;
-    }
+        float:left;
+        padding-right: 20px;
+      }
+      li.li_right{
+        float:right;
+      }
     }
     
   }
-
   .post_modal{
     max-height: 600px;
     max-width: 900px !important;
@@ -119,7 +118,118 @@ $avatar_img_modal_height: 40px;
     border-top:1px solid #e9ecef;
   }
 }
+}
 
 }
 
+@media (max-width: 575.98px) { 
+  .show_profile{
+    padding: 100px 50px 10px 50px !important;
+    .list{
+      display: none;
+    }
+
+    .form_input{
+      .label{
+        float:left;
+      }
+    }
+
+    .avatar_img{
+      #blah{  
+        float: left !important;
+      }
+    }
+
+    .posts{
+      flex-wrap: nowrap !important;
+    }
+
+    .edit_profile_link{
+      width: 100% !important;
+      .button{
+        width:100% !important;
+      }
+    }
+
+    .name_field{
+      text-align: center;
+      width:100%;
+    }
+
+    .info ul{
+      margin: 0 auto;
+    }
+
+    .info_description{
+      margin:auto;
+    }
+    .modal{
+      .footer{
+        position: unset !important;
+      }
+    }
+
+    .w_comment{
+      display: none;
+    }
+  }
+
+}
+@media (min-width: 576px) and (max-width: 767.98px){ 
+  .show_profile{
+    padding: 100px 50px 10px 50px !important;
+    .list{
+      display: none;
+    }
+
+    .form_input{
+      .label{
+        float:left;
+      }
+    }
+
+    .avatar_img{
+      #blah{  
+        float: left !important;
+      }
+    }
+
+    .posts{
+      flex-wrap: nowrap !important;
+    }
+
+    .edit_profile_link{
+      width: 100% !important;
+      .button{
+        width:100% !important;
+      }
+    }
+
+    .name_field{
+      text-align: center;
+      width:100%;
+    }
+    .info ul{
+      margin: 0 auto;
+    }
+    .info_description{
+     margin:auto;
+   }
+
+   .modal{
+    .footer{
+      position: unset !important;
+    }
+  }
+  .w_comment{
+    display: none;
+  }
+}
+}
+
+@media (min-width: 768px) and (max-width: 991.98px){ 
+ .show_profile{
+   padding: 100px 50px 10px 50px !important;
+ }
 }
