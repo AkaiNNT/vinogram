@@ -5,11 +5,8 @@ class UsersController < ApplicationController
 
   def update
     @user = User.find(params[:id])
-
     if @user.update(user_params)
-       flash[:success] = "Edit Profile successfully!"
-      redirect_to home_index_path 
-
+      redirect_to edit_user_path, notice: "Edit profile successful!"
     else
       render 'edit'
     end

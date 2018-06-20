@@ -39,9 +39,8 @@
                   </div>
                 </div>
               </div>
-              <div class="modal-footer" style="display: -moz-box;">
+              <div class="modal-footer w_comment">
                 <!-- add comment for this post-->
-
                 <%= simple_form_for @user do |f| %>
                 <%= f.text_field :description, as: :text, placeholder: 'Add the comment', class: 'comment_field' %>
                 <i class="fa fa-ellipsis-h"></i>
