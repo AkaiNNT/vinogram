@@ -1,5 +1,8 @@
 <h3>List of User</h3>
 <div class="container-fluid">
+  <div class="mr-auto">
+    <%= link_to 'Create user',new_admins_user_path, class: 'btn btn-primary' %>
+  </div>
   <div class="table-responsive">
     <table class="table table-striped">
       <thead class="thead-dark">
@@ -23,7 +26,7 @@
               <td><%= u.full_name %></td>
               <td><%= u.contact_number %></td>
               <td><%= u.description %></td>
-              <td><%= link_to 'Show', admins_user_path(u), method: :get %> | <%= link_to 'Edit', edit_admins_user_path(u) %> | <%= link_to 'Delete', admins_user_path(u),method: :delete %> </td>
+              <td><%= link_to 'Show', admins_user_path(u), method: :get %> | <%= link_to 'Edit', edit_admins_user_path(u) %> | <%= link_to 'Delete', admins_user_path(u),method: :delete , data: { confirm: 'Are you sure?' } %> </td>
             </tr>
           <% end %>
         <% else %>

@@ -1,0 +1,19 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-10 col-sm-8 col-md-6 col-lg-4 mx-auto">
+      <div class="text-left">
+        <h3>Change user infomation</h3>
+        <%= image_tag @user.avatar.url ,class: 'edit-avatar'%><br>
+        User: <%= @user.email %>
+        <%= simple_form_for @user,url: admins_user_path(@user),method: :put do |f| %>
+          <%= f.input :full_name %>
+          <%= f.input :contact_number %>
+          <%= f.input :description %>
+          <%= f.input :password, placeholder: 'Leave it blank if you don want to change' %>
+          <%= f.input :password_confirmation %>
+          <%= f.button :submit %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
