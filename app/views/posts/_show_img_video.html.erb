@@ -1,16 +1,16 @@
 <section class="img_or_video">
 	<%if post.pictures.present? %>
 		<div id="carousel_<%=post.id%>" class="carousel slide" data-ride="carousel">
-			<div class="row">
+			<div class="row img-post">
 			  <div class="carousel-inner">
 					<% post.pictures.each_with_index do |pic, index| %>
 				  	<% if index == 0 %>
 					    <div class="carousel-item active">
-					      <%= image_tag(pic.image.url, :class => "d-block w-100 img-post")%>
+					      <%= image_tag(pic.image.url, :class => "d-block w-100 ")%>
 					    </div>
 					  <% else %>
 					    <div class="carousel-item">
-						    <%= image_tag(pic.image.url, :class => "d-block w-100 img-post")%>
+						    <%= image_tag(pic.image.url, :class => "d-block w-100")%>
 					    </div>
 					  <% end %>
 					<% end %>

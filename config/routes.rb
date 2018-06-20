@@ -5,6 +5,7 @@ Rails.application.routes.draw do
     registrations: 'users/registrations'
   }
   resources :posts do
+    resources :comments, controller: 'posts/comments'
     resources :likes, controller: 'posts/likes'
   end
   get 'home/index'

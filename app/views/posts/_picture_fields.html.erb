@@ -6,8 +6,7 @@
       <%= image_tag "upload.png", class: 'logo'%>
     <% end %>
 	</div>
-	<%= f.file_field :image, class: 'image_uploader d-none'%>
-
+	<%= f.file_field :image, class: 'image_uploader d-none', accept: 'image/png,image/gif,image/jpeg,image/jpg' %>
   <%= link_to_remove_association "<button class='btn btn-danger btn-delete fa fa-close'></button>".html_safe, f %>
 </div>
 <script type="text/javascript">
@@ -26,13 +25,7 @@
         reader.readAsDataURL(input.files[0]);
       }
     };
-    $('.image_uploader').off();
     $('.image_uploader').on('change', function() {
-      console.log(document.querySelector(".image_uploader").files[0].type);
-      if(['image/jpg','image/jpeg','image/png','image/gif'].indexOf(document.querySelector(".image_uploader").files[0].type) == -1) {
-        alert('Error : Only image format allowed');
-        return;
-      }
       imagesPreview(this);
     });
   });

@@ -2,6 +2,7 @@ class Post < ApplicationRecord
   belongs_to :user
   has_many :pictures, as: :imageable, dependent: :destroy
   has_many :likes,                    dependent: :destroy
+  has_many :comments,                 dependent: :destroy
 
   accepts_nested_attributes_for :pictures, reject_if: :all_blank, allow_destroy: true
   validate :has_pictures?
