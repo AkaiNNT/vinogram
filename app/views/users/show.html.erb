@@ -11,7 +11,7 @@
 
      <div class="col-md-8">
       <div class="row">
-       <h4><%= @user.email %></h4>
+       <h4 class="name_field"><%= @user.full_name%></h4>
        <div class="edit_profile_link">
          <%= link_to 'Edit Profile', edit_user_path(@user), class: 'button'%>
        </div>
@@ -23,8 +23,13 @@
          <li><strong>62</strong> following</li>
        </ul>
      </div>
-     <div class="row">
-       <strong><%= @user.full_name%>: </strong> <%= @user.description%>
+     <div class="row ">
+      <span class="info_description">
+       <strong><%= @user.email%> </strong>
+       <%if @user.description%> 
+       : <%= @user.description%>
+       <%end%>
+     </span>
      </div>
    </div>
  </div>

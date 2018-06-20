@@ -1,5 +1,6 @@
 @import './base/variable';
 .edit_profile {
+  min-height: 500px;
   padding: $primary-padding;
 
   .list{
@@ -28,11 +29,11 @@
     }
     li.actived{
       border-left: 2px black solid !important;
-     font-weight: bold;
-     border-radius: 0px !important;
+      font-weight: bold;
+      border-radius: 0px !important;
 
-   }
- }
+    }
+  }
 }
 
 .article{
@@ -79,4 +80,54 @@
    padding: 0px 10px 5px 10px !important;
  }
 }
+
+
+}
+
+@media (max-width: 575.98px) { 
+  .edit_profile{
+    padding: 100px 50px 10px 50px !important;
+    .list{
+      display: none;
+    }
+
+    .form_input{
+      .label{
+        float:left;
+      }
+    }
+
+    .avatar_img{
+      #blah{  
+        float: left !important;
+      }
+    }
+  }
+
+}
+@media (min-width: 576px) and (max-width: 767.98px){ 
+  .edit_profile{
+    padding: 100px 50px 10px 50px !important;
+    .list{
+      display: none;
+    }
+
+    .form_input{
+      .label{
+        float:left;
+      }
+    }
+
+    .avatar_img{
+      #blah{  
+        float: left !important;
+      }
+    }
+  }
+}
+
+@media (min-width: 768px) and (max-width: 991.98px){ 
+ .edit_profile{
+   padding: 100px 50px 10px 50px !important;
+ }
 }
