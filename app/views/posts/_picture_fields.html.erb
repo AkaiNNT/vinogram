@@ -28,7 +28,11 @@
     };
     $('.image_uploader').off();
     $('.image_uploader').on('change', function() {
-      $('.previewer').removeClass('d-none');
+      console.log(document.querySelector(".image_uploader").files[0].type);
+      if(['image/jpg','image/jpeg','image/png','image/gif'].indexOf(document.querySelector(".image_uploader").files[0].type) == -1) {
+        alert('Error : Only image format allowed');
+        return;
+      }
       imagesPreview(this);
     });
   });

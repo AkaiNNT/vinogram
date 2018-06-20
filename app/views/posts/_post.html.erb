@@ -11,52 +11,87 @@
 			      </div>
 						<div class="col-sm-10 col-md-10 col-lg-11 col-10">
 							<%= link_to post.user.full_name, user_path(post.user), :class => "name-user", :'data-toggle' => :tooltip, :title => post.created_at.strftime("At %r")%>
-							<div class="nav-item dropdown float-right">
-						    <a class="nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">...</a>
-						    <div class="dropdown-menu">
-						    	<%= link_to "Edit", edit_post_path(post), class: "dropdown-item" %>
-						    	<%= link_to "Delete", post_path(post), class: "dropdown-item",method: :delete, data: {confirm: "Are you sure?"}%>
-						    </div>
-						  </div>
+							<% if post.user = current_user %>
+								<div class="nav-item dropdown float-right">
+							    <a class="nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">...</a>
+							    <div class="dropdown-menu">
+							    	<%= link_to "Edit", edit_post_path(post), class: "dropdown-item", "data-toggle": "modal", "data-target": "#editPost_#{post.id}" %>
+							    	<%= link_to "Delete", post_path(post), class: "dropdown-item",method: :delete, data: {confirm: "Are you sure?"}%>
+							    </div>
+							  </div>
+							<% end %>
 						</div>
 					</header>
-					<div class="row">
-						<%if post.pictures.present? %>
-							<div id="carousel_<%=post.id%>" class="carousel slide" data-ride="carousel">
-							  <div class="carousel-inner">
-									<% post.pictures.each_with_index do |pic, index| %>
-								  	<% if index == 0 %>
-									    <div class="carousel-item active">
-									      <%= image_tag(pic.image.url, :class => "d-block w-100")%>
-									    </div>
-									  <% else %>
-									    <div class="carousel-item">
-										    <%= image_tag(pic.image.url, :class => "d-block w-100")%>
-									    </div>
-									  <% end %>
-									<% end %>
-							  </div>
-							  <a class="carousel-control-prev" href="#carousel_<%=post.id%>" role="button" data-slide="prev">
-							    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-							    <span class="sr-only">Previous</span>
-							  </a>
-							  <a class="carousel-control-next" href="#carousel_<%=post.id%>" role="button" data-slide="next">
-							    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-							    <span class="sr-only">Next</span>
-							  </a>
-							</div>
-						<% else %>
-							<%= video_tag post.attachment.url(:medium), controls: true,type: 'video/mp4', style: "max-width: 100%;" %>
-						<% end %>
-					</div>
+					<%= render 'show_img_video', post: post %>
+					<section class="like_and_cmt">
+						<br>
+						<%= link_to "<i class='fa fa-heart-o fa-2x'></i>".html_safe, new_post_like_path(post)%>
+						<%= link_to "<i class='fa fa-comment-o fa-2x icon-comment'></i>".html_safe%>
+						<%= link_to "<i class='fa fa-bookmark-o fa-2x float-right'></i>".html_safe%>
+					</section>
+					<section class="count_like">
+						<b><%= post.likes.count%>
+							<% if post.likes.count >= 2%>
+								likes
+							<% else %>
+								like
+							<% end %>
+						</b>
+					</section>
+					<section class="content_post">
+						<p><b><%= post.user.full_name %></b> <%= post.content%></p>
+					</section>
 				</div>
 			</div>
 		</div>
 	</div>
 </section>
 <br>
+
+<!-- <div class="form-create-post">
+	<div class="modal fade" id="editPost_<%=post.id%>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	  <div class="modal-dialog modal-lg" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h5 class="modal-title" id="exampleModalLabel">Edit Post</h5>
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	          <span aria-hidden="true">&times;</span>
+	        </button>
+	      </div>
+	      <div class="modal-body">
+	      	<%#= form_for(post,:method => :put) do |f| %>
+	      		<div class="field">
+	            <%#= f.label :content %><br>
+	            <%#= f.text_area :content, class: "form-control "%>
+	          </div>
+	          <br>
+          	<div class="row" id="edit-cocoon">
+				      <%#= f.fields_for :pictures do |pic| %>
+				        <%#= render 'picture_fields', :f => pic %>
+				      <%# end %>
+				    </div>
+						<br>
+				    <div class='links'>
+	    				<%#= link_to_add_association '<button type="button" class="btn btn-default" id="btn-upload-img"><i class="fa fa-camera"></i></button>'.html_safe, f, :pictures, id: 'link-edit' %>
+	    			</div>
+	      		<div class="modal-footer">
+	        		<button type="button" class="btn btn-secondary" onclick="$('#link-edit').off();" data-dismiss="modal">Close</button>
+	      			<%#= submit_tag "Save changes", class: "btn btn-primary" %>
+	      		</div>
+	      	<%# end %>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+</div> -->
+
 <script type="text/javascript">
 	$('.carousel').carousel({
     interval: false
 	}); 
+	// $(document).ready(function() {
+ //    $("#link-edit").
+ //      data("association-insertion-method", 'append').
+ //      data("association-insertion-node", '#edit-cocoon');
+ //  });
 </script>
