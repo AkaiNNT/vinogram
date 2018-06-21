@@ -1,0 +1,40 @@
+<div>
+  <a href="javascript:history.back()" class="btn btn-primary">Back</a>
+</div>
+<div class="row">
+  <div class="col-10 col-sm-8 col-md-6 col-lg-6 mx-auto">
+    <div class="text-left">
+      <h3>Create new post</h3>
+      <%= simple_form_for @post, url: admins_posts_path, method: :post do |f| %>
+        <%= f.input :content, autofocus: true, label: false, placeholder: 'Content' %>
+        <div class="form-actions">
+          <div class="row" id="add-cocoon">
+            <div id="video-demo-container" class="d-none">
+              <video id="main-video" controls>
+                <source type="video/mp4">
+              </video>
+            </div>
+          </div>
+          <div class="eventUploadVideo">
+            <%= f.file_field :attachment,id: "file-to-upload" , class: "d-none", accept: 'video/mp4' %>
+          </div>
+          <div class="links">
+            <%= link_to_add_association '<button type="button" class="btn btn-default" id="btn-upload-img"><i class="fa fa-camera"></i></button>'.html_safe, f, :pictures, id: 'link-add-pic' %>
+
+            <button type="button" class="btn btn-default" id="upload-button" ><i class="fa fa-video-camera"></i><label class="text-right"></label></button>
+            <%= f.button :submit, "Post" , :class => "btn btn-outline-primary btn-post"%>
+          </div>
+        </div>
+        <%= f.button :submit %>
+      <% end %>
+    </div>
+    <% flash.each do |key, value| %>
+      <div class="row">
+        <div class="alert alert-<%= key %>">
+          <%= value %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+

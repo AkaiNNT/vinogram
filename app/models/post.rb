@@ -24,7 +24,7 @@ class Post < ApplicationRecord
 
   def has_pictures?
     if (self.pictures.present? && self.attachment.present? )
-      errors.add(:base,"Post must has only pictures or video") 
+      errors.add(:base,"Post must has only pictures or video")
     elsif (self.pictures.blank? && self.attachment.blank?)
       errors.add(:base, "Post must has at least one picture or one video.")
     end

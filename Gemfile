@@ -59,6 +59,10 @@ gem 'paperclip-optimizer','2.0.0'
 
 gem 'simple_form'
 
+gem "paperclip-ffmpeg", "~> 1.2.0"
+
+gem 'aws-sdk', '< 2.0'
+
 gem "letter_opener", :group => :development
 
 group :development, :test do

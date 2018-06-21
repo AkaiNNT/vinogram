@@ -8,6 +8,14 @@
         <%= simple_form_for @search , url: admins_users_path, method: :get do |f| %>
           <%= f.input :search, label: false, placeholder: 'Search' %>
         <% end %>
+      <% elsif controller_name == 'comments' %>
+        <%= simple_form_for @search , url: admins_comments_path, method: :get do |f| %>
+          <%= f.input :search, label: false, placeholder: 'Search' %>
+        <% end %>
+      <% elsif controller_name == 'posts' %>
+        <%= simple_form_for @search , url: admins_posts_path, method: :get do |f| %>
+          <%= f.input :search, label: false, placeholder: 'Search' %>
+        <% end %>
       <% end %>
     </div>
     <div class="ml-auto logout">

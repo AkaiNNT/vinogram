@@ -1,38 +1,50 @@
 <h3>List of User</h3>
-<div class="mr-auto">
-  <%= link_to 'Create post', '#', class: 'btn btn-primary' %>
+<div class="row">
+  <div class="mr-auto">
+    <a href="javascript:history.back()" class="btn btn-primary">Back</a>
+  </div>
+  <div class="ml-auto">
+    <%= link_to 'Create post',new_admins_post_path, class: 'btn btn-primary' %>
+  </div>
 </div>
+<br>
 <div class="table-responsive">
   <table class="table table-striped">
     <thead class="thead-dark">
       <tr>
         <th scope="col">Id</th>
         <th scope="col">Content</th>
-        <th scope="col">Pictures</th>
-        <th scope="col">User Id</th>
+        <th scope="col">Pictures / Videos</th>
+        <th scope="col">User / ID</th>
         <th scope="col">Created At</th>
         <th scope="col">Action</th>
       </tr>
     </thead>
     <tbody>
       <% if @posts.count > 0 %>
-        <% @posts.each do |u| %>
+        <% @posts.each do |p| %>
           <tr>
-            <th scope="row"><%= u.id %></th>
-            <td><%= u.content %></td>
-            <td><% u.pictures.each do |p| %>
+            <th scope="row"><%= p.id %></th>
+            <td><%= p.content %></td>
+            <td>
+              <% if p.pictures.present? %>
+                <% p.pictures.each do |p| %>
                   <%= image_tag p.image.url(:thumb) %>
                   <br>
                 <% end %>
+              <% else %>
+                <%= image_tag p.attachment.url(:thumb), controls: true,type: 'video/mp4', style: "max-width: 100%;" %>
+              <% end %>
+
             </td>
-            <td><%= u.user_id %></td>
-            <td><%= u.created_at %></td>
-            <td><%= link_to 'Show', admins_user_path(u), method: :get %> | <%= link_to 'Edit', edit_admins_user_path(u) %> | <%= link_to 'Delete', admins_user_path(u),method: :delete , data: { confirm: 'Are you sure?' } %> </td>
+            <td><%= p.user.full_name %> / <%= p.user_id %></td>
+            <td><%= p.created_at %>  ( <%= time_ago_in_words(p.created_at) %> ago ) </td>
+            <td><%= link_to 'Show', admins_post_path(p), method: :get %> | <%= link_to 'Edit', edit_admins_post_path(p) %> | <%= link_to 'Delete', admins_post_path(p),method: :delete , data: { confirm: 'Are you sure?' } %> </td>
           </tr>
         <% end %>
       <% else %>
         <tr>
-          <td colspan="7">No one use your vinogram. Poor you :( .</td>
+          <td colspan="6">Not found.</td>
         </tr>
       <% end %>
     </tbody>
