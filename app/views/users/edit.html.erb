@@ -31,7 +31,8 @@
           <div class="row row_input">
             <div class="col-md-3"></div>
             <div class="col-md-9">
-              <%= f.input :status, as: :boolean, label: 'Private Account',checked_value: "0", unchecked_value: "1"%>
+              <%= f.check_box :status, {}, 'privacy', 'pub' %>
+              <%= f.label 'Privacy', class: 'check_label'%>
                 <p class="content_privacy">When your account is private, only people you approve can see your photos and videos on Instagram. Your existing followers won't be affected.</p>
               </div>
           </div>
