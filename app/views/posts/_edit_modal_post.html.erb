@@ -29,7 +29,7 @@
 						<br>
 				    <div class='links'>
 					  	<%#= f.file_field :attachment,id: "file-to-upload-edit" , class: "d-none", accept: 'video/mp4' %>
-	    				<%= link_to_add_association '<button type="button" class="btn btn-default" id="btn-upload-img-edit"><i class="fa fa-camera"></i></button>'.html_safe, f, :pictures, id: 'link-edit' %>
+	    				<%= link_to_add_association ('<button type="button" class="btn btn-default btn-upload-img-edit" data-post-id="' + post.id.to_s + '"><i class="fa fa-camera"></i></button>').html_safe, f, :pictures, id: 'link-edit_'+ post.id.to_s %>
 					    <!-- <button type="button" class="btn btn-default" id="upload-button-edit" ><i class="fa fa-video-camera"></i><label class="text-right"></label></button> -->
 	    			</div>
 	      		<div class="modal-footer">
@@ -44,11 +44,6 @@
 </div>
 
 <script type="text/javascript">
-	$(document).ready(function() {
-    $("#link-edit").
-      data("association-insertion-method", 'append').
-      data("association-insertion-node", '#edit-cocoon');
-  });
 
 
 	// var _EDIT_VIDEO = document.querySelector("#edit-video");

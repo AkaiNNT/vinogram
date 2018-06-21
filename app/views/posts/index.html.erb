@@ -29,9 +29,9 @@
 		$('#video-demo-container').removeClass('d-none');
 		$('.image_uploader').val(null);
 		$('.nested-fields').addClass('d-none');
-		_VIDEO.load();
-		_VIDEO.style.display = 'inline';
-	});
+			_VIDEO.load();
+			_VIDEO.style.display = 'inline';
+		});
 
 
 	document.querySelector("#btn-upload-img").addEventListener('click', function() {
@@ -39,5 +39,19 @@
 		$("#video-demo-container").addClass('d-none');
 	});
 
+	// document.querySelector('.link-edit').addEventListener('click', function() {
+	// 	var post_id = $(this).data('post-id');
+	// 	alert(post_id);
+
+	// 	$('#editPost_'+post_id).on('show.bs.modal', function() {
+	//     // do something when the modal is shown
+	// 		$(document).ready(function() {
+	// 	    $("#link-edit_"+post_id).
+	// 	      data("association-insertion-method", 'append').
+	// 	      data("association-insertion-node", '#edit-cocoon_'+post_id);
+	// 	  });
+	// 	});
+	// });
+	
 
 </script>
