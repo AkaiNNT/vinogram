@@ -58,7 +58,6 @@
 								<form class="form-inline">
 									<div class="form-group">
 										<%= form.input :content ,placeholder: 'Add a comment...',label: false, input_html: { class: 'content-comment', id: "myInput_#{post.id}" }, row: 10 %>
-										<p><%= form.button :submit ,'Comment', :class => "btn btn-primary" %></p>
 									</div>
 								</form>
 							</div>
@@ -87,4 +86,14 @@
 		    }
 		});
 	}
+	$('#editPost_<%=post.id%>').on('show.bs.modal', function() {
+    // do something when the modal is shown
+		$(document).ready(function() {
+	    $("#link-edit_<%= post.id%>").
+	      data("association-insertion-method", 'append').
+	      data("association-insertion-node", '#edit-cocoon_<%post.id%>');
+	  });
+	}
+
+
 </script>

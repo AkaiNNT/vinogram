@@ -1,6 +1,11 @@
 	<b><%= comment.user.full_name %></b> <%= comment.content %>
-	<a aria-haspopup="true" aria-expanded="false" id="dropdownCmt_<%comment.id%>"><i class="fa fa-caret-down float-right"></i></a>
-
+	<div class="dropdown float-right">
+	  <a data-toggle="dropdown" href="">```</a>
+	  <div class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+			  <%= link_to "Edit", edit_post_comment_path(comment,comment), class: "dropdown-item", "data-toggle": "modal", "data-target": "#editCmt_#{comment.id}" %>
+	    	<%= link_to "Delete", post_comment_path(comment,post_id: comment.post_id), class: "dropdown-item",method: :delete, data: {confirm: "Are you sure?"}%>
+	  </div>
+	</div>
 
 
 	<br>
