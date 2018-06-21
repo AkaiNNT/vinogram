@@ -1,9 +1,7 @@
-@import './base/variable';
-$avatar_img_width : 150px;
-$avatar_img_height : 150px;
 
-$avatar_img_modal_width: 40px;
-$avatar_img_modal_height: 40px;
+@import './base/variable';
+@import './layouts/modal';
+
 .show_profile{
  padding: $primary-padding;
  .avatar_img{
@@ -76,11 +74,10 @@ $avatar_img_modal_height: 40px;
   }
 }
 
-.modal{
+/*.modal{
   .footer{
     position: fixed;
     bottom: 0;
-    /*    width: 100%;*/
     padding:0px;
     height: auto !important;
 
@@ -117,7 +114,10 @@ $avatar_img_modal_height: 40px;
     display: inherit !important;
     border-top:1px solid #e9ecef;
   }
-}
+  .w_comment{
+    justify-content: left !important;
+  }
+  }*/
 }
 
 }

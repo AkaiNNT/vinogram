@@ -18,21 +18,20 @@
             <%= f.file_field :avatar, value: 'Edit avatar', id: 'edit_avatar', onchange: "readURL(this);"%>
           </div>
           <div class="col-md-9">
-            <h4><%= @user.email %></h4>
+            <h4><%= @user.full_name %></h4>
          </div>
        </div>   
 
-      
         <div class="row row_input">
-          <div class="col-md-3"><%= f.label 'Old Password' , class: 'label'%></div>
+          <div class="col-md-3 pr-0"><%= f.label 'Old Password' , class: 'label'%></div>
           <div class="col-md-9 "><%= f.input_field :current_password, autocomplete: "off", hint: "we need your current password to confirm your changes", required: true, class: 'input_field' %></div>
         </div>
         <div class="row row_input">
-          <div class="col-md-3"><%= f.label :password, class: 'label'%></div>
+          <div class="col-md-3 pr-0"><%= f.label :password, class: 'label'%></div>
           <div class="col-md-9 "><%= f.input_field :password , hint: "leave it blank if you don't want to change it", required: false, class: 'input_field' %></div>
         </div>
          <div class="row row_input">
-          <div class="col-md-3"><%= f.label :description, class: 'label'%></div>
+          <div class="col-md-3 pr-0"><%= f.label :description, class: 'label'%></div>
           <div class="col-md-9 "><%= f.input_field :password_confirmation, required: false, class: 'input_field' %></div>
         </div>
         <div class="row row_input">

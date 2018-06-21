@@ -10,7 +10,12 @@ Rails.application.routes.draw do
   end
   get 'home/index'
   root to: "home#index"
-  resources :users
+
+
+  resources :users do 
+    get 'suggested', to: 'users#suggested', on: :collection
+    put 'follow', to: 'users#follow', on: :member
+  end
 
   devise_for :admins, controllers: {
     sessions: 'admins/sessions'
@@ -22,4 +27,5 @@ Rails.application.routes.draw do
     resources :comments
     root to: 'dashboards#index'
   end
+
 end

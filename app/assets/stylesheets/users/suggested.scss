@@ -1,0 +1,50 @@
+@import './base/variable';
+
+.suggested{
+  padding: $primary-padding_suggested;
+ .avatar_following{
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+
+.info_following{
+  list-style: none;
+}
+
+.tb_following{
+  border: 1px solid #dee2e6;
+  td {
+    padding-left: 40px;
+  }
+
+  .button{
+    float: right;
+    margin-right: 40px;
+    height: 80%;
+  }
+  .full_name{
+    color: #999;
+    font-size:12px;
+  }
+}
+}
+
+@media (max-width: 575.98px) { 
+  .suggested{
+    padding: 100px 0 10px 0 !important;
+  }
+
+}
+@media (min-width: 576px) and (max-width: 767.98px){ 
+  .suggested{
+    padding: 100px 50px 10px 50px !important;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 991.98px){ 
+ .suggested{
+   magrin: 0 auto;
+   padding: 100px 200px 10px 200px !important;
+ }
+}

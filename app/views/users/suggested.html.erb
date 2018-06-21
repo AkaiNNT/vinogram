@@ -1,0 +1,33 @@
+<div class="suggested">
+ <div> 
+   <!-- start table-->
+   <table class="table tb_following">
+    <tbody>
+      <% @users.each do |user| %>
+      <tr>
+        <td>
+          <div class="row">
+          <a href="<%=user_path(user)%>"> <%= image_tag (user.avatar.url), class: "avatar_following" %></a>
+         <ul class="info_following">
+          <li><%= user.email%></li>
+          <li class="full_name"><%= user.full_name%></li>
+        </ul>
+      </div>
+      </td>
+
+      <td>
+        <%#= simple_form_for user, url: follow_user_path(user), method: :put, html: {multipart: true} do |f|%>
+        <%#= f.button :submit, "Follow", class: 'btn small-btn btn-primary button' %>
+        <%# end %>
+        <% if current_user.followings.pluck(:following_id).include?(user.id) %>
+        <% else %>
+          <%= button_to "Follow", follow_user_path(user), class: 'btn small-btn btn-primary button', method: :put %>
+        <% end %>
+      </td>
+    </tr>
+    <%end%>
+  </tbody>
+</table>
+<!-- end table-->
+</div>
+</div>
