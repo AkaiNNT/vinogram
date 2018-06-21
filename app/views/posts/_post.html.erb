@@ -38,8 +38,31 @@
 							<% end %>
 						</b>
 					</section>
-					<section class="content_post">
-						<p><b><%= post.user.full_name %></b> <%= post.content%></p>
+					<% if post.content.present? %>
+						<section class="content_post">
+							<p><b><%= post.user.full_name %></b> <%= post.content.truncate(100) %></p>
+						</section>
+					<% end %>
+					<% if post.comments.present? %>	
+						<section class="all_comments">
+							<% post.comments.each do |comment| %>
+								<%= render "posts/comments/comment", comment: comment %>
+							<% end %>
+						</section>
+					<% end %>
+					<p class="text-time-post"><%= link_to "#{time_ago_in_words(post.created_at)} ago", post_path(post) %></p>
+					<hr>
+					<section class="create_comment">
+						<%= simple_form_for post.comments.build ,url: post_comments_path(post), html: {id: "myForm_#{post.id}"} , method: :post do |form| %>
+							<div class="comment-form ">
+								<form class="form-inline">
+									<div class="form-group">
+										<%= form.input :content ,placeholder: 'Add a comment...',label: false, input_html: { class: 'content-comment', id: "myInput_#{post.id}" }, row: 10 %>
+										<p><%= form.button :submit ,'Comment', :class => "btn btn-primary" %></p>
+									</div>
+								</form>
+							</div>
+						<% end %>
 					</section>
 				</div>
 			</div>
@@ -54,9 +77,14 @@
 	$('.carousel').carousel({
     interval: false
 	}); 
-	$(document).ready(function() {
-    $("#link-edit").
-      data("association-insertion-method", 'append').
-      data("association-insertion-node", '#edit-cocoon');
-  });
+
+	var input = document.getElementById("myInput_<%=post.id%>");
+	if (input) {
+		input.addEventListener("keyup", function(event) {
+		    event.preventDefault();
+		    if (event.keyCode === 13) {
+		        document.getElementById("myForm_<%=post.id%>").submit();
+		    }
+		});
+	}
 </script>
