@@ -1,10 +1,9 @@
 <h3>Details of User</h3>
-<div class="container-fluid">
-  <div class="row mx-auto">
-    <div class="col-12 text-center">
-      <%= image_tag @user.avatar.url, class: 'show-avatar' %>
-      <h3><%= @user.full_name %></h3>
-      <p>Email: <%= @user.email %> <br> Contact: <%= @user.contact_number %> <br> Description: <%= @user.description %> </p>
-    </div>
+<div class="row mx-auto">
+  <div class="col-12 text-center">
+    <%= image_tag @user.avatar.url, class: 'show-avatar' %>
+    <h3><%= @user.full_name %></h3>
+    <p>Email: <%= @user.email %> <br> Contact: <%= @user.contact_number %> <br> Description: <%= @user.description %> </p>
   </div>
 </div>
+

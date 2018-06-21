@@ -1,19 +1,51 @@
-<div class="container-fluid">
-  <div class="row">
-    <div class="col-10 col-sm-8 col-md-6 col-lg-4 mx-auto">
-      <div class="text-left">
-        <h3>Change user infomation</h3>
-        <%= image_tag @user.avatar.url ,class: 'edit-avatar'%><br>
-        User: <%= @user.email %>
-        <%= simple_form_for @user,url: admins_user_path(@user),method: :put do |f| %>
-          <%= f.input :full_name %>
-          <%= f.input :contact_number %>
-          <%= f.input :description %>
-          <%= f.input :password, placeholder: 'Leave it blank if you don want to change' %>
-          <%= f.input :password_confirmation %>
-          <%= f.button :submit %>
-        <% end %>
-      </div>
+<div class="row">
+  <div class="col-10 col-sm-8 col-md-6 col-lg-4 mx-auto">
+    <div class="text-left">
+      <h3>Change user infomation</h3>
+      <%= image_tag @user.avatar.url ,class: 'edit-avatar'%><br>
+      <%= button_tag 'Remove', class: 'btn btn-primary ml-4 d-none', id: 'unchange-btn'%><br>
+      User: <%= @user.email %>
+      <%= simple_form_for @user,url: admins_user_path(@user),method: :put, html: { multipart: true } do |f| %>
+        <%= f.input :full_name %>
+        <%= f.input :contact_number %>
+        <%= f.input :description %>
+        <%= f.input :avatar, label: false, input_html: { style: 'file', accept: 'image/png,image/gif,image/jpeg', class: 'd-none avatar-uploader'} %>
+        <%= f.input :password, placeholder: 'Leave it blank if you don want to change' %>
+        <%= f.input :password_confirmation %>
+        <%= f.button :submit %>
+      <% end %>
     </div>
   </div>
 </div>
+
+<script type="text/javascript">
+
+  $(document).ready(function(){
+    srcold = $('.edit-avatar').attr('src');
+
+    $('.edit-avatar').on('click',function() {
+      $('.avatar-uploader').click();
+    });
+
+    function readURL(input){
+      if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function(e) {
+          $('.edit-avatar').attr('src', e.target.result);
+        }
+         reader.readAsDataURL(input.files[0]);
+      }
+    }
+
+    $('.avatar-uploader').on('change',function(){
+      $('#unchange-btn').removeClass('d-none');
+      readURL(this);
+    });
+
+    $('#unchange-btn').click(function() {
+      $(this).addClass('d-none');
+      $('.edit-avatar').attr('src',srcold);
+      $('.avatar-uploader').val('');
+    });
+  });
+</script>

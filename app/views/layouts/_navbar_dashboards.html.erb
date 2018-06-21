@@ -4,10 +4,14 @@
       <%= image_tag 'logo.png', class: 'logo-navbar'%><span class="font-weight-bold brand-name d-none d-sm-inline">VINOGRAM</span>
     </div>
     <div class="m-auto">
-      <input type="text" placeholder="Search" />
+      <% if controller_name == 'users' %>
+        <%= simple_form_for @search , url: admins_users_path, method: :get do |f| %>
+          <%= f.input :search, label: false, placeholder: 'Search' %>
+        <% end %>
+      <% end %>
     </div>
     <div class="ml-auto logout">
-      <%= link_to('Logout', destroy_admin_session_path , method: :delete) %>
+      <%= link_to('Logout', destroy_admin_session_path , method: :delete, class: 'btn btn-light') %>
     </div>
   </div>
 </div>
