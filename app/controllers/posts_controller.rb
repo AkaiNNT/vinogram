@@ -32,6 +32,7 @@ class PostsController < ApplicationController
   def edit;  end
 
   def update
+    asdsadsadsa
     if @post.update_attributes(post_params)
       redirect_to posts_path
     else

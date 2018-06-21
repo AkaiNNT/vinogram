@@ -16,20 +16,24 @@
 	          </div>
 	          <br>
           	<div class="row" id="edit-cocoon">
-					    <% if post.pictures.present? %>  
-					      <%= f.fields_for :pictures do |pic| %>
-					        <%= render 'picture_fields', :f => pic %>
-					      <% end %>
-					    <% else %>
+				      <%= f.fields_for :pictures do |pic| %>
+				        <%= render 'picture_fields', :f => pic %>
+				      <% end %>
 					      <!-- TODO EDIT VIDEO -->
-							<% end %>
+<!-- 					    <div id="video-edit-container" class="d-none video-container">
+								<video id="edit-video" controls class="show-video">
+									<source type="video/mp4"> 
+								</video>
+							</div> -->
 				    </div>
 						<br>
 				    <div class='links'>
-	    				<%= link_to_add_association '<button type="button" class="btn btn-default" id="btn-upload-img"><i class="fa fa-camera"></i></button>'.html_safe, f, :pictures, id: 'link-edit' %>
+					  	<%#= f.file_field :attachment,id: "file-to-upload-edit" , class: "d-none", accept: 'video/mp4' %>
+	    				<%= link_to_add_association '<button type="button" class="btn btn-default" id="btn-upload-img-edit"><i class="fa fa-camera"></i></button>'.html_safe, f, :pictures, id: 'link-edit' %>
+					    <!-- <button type="button" class="btn btn-default" id="upload-button-edit" ><i class="fa fa-video-camera"></i><label class="text-right"></label></button> -->
 	    			</div>
 	      		<div class="modal-footer">
-	        		<button type="button" class="btn btn-secondary" onclick="$('#link-edit').off();" data-dismiss="modal">Close</button>
+	        		<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
 	      			<%= submit_tag "Save changes", class: "btn btn-primary" %>
 	      		</div>
 	      	<% end %>
@@ -38,3 +42,37 @@
 	  </div>
 	</div>
 </div>
+
+<script type="text/javascript">
+	$(document).ready(function() {
+    $("#link-edit").
+      data("association-insertion-method", 'append').
+      data("association-insertion-node", '#edit-cocoon');
+  });
+
+
+	// var _EDIT_VIDEO = document.querySelector("#edit-video");
+	
+	// document.querySelector("#upload-button-edit").addEventListener('click', function() {
+		
+	// 	document.querySelector("#file-to-upload-edit").click();
+
+	// });
+	
+	// document.querySelector("#file-to-upload-edit").addEventListener('change', function() {
+	// 	// Object Url as the video source
+	// 	document.querySelector("#edit-video source").setAttribute('src', URL.createObjectURL(document.querySelector("#file-to-upload-edit").files[0]));
+		
+	// 	// Load the video and show it
+	// 	$('#video-edit-container').removeClass('d-none');
+	// 	$('.image_uploader').val(null);
+	// 	$('.nested-fields').addClass('d-none');
+	// 	_EDIT_VIDEO.load();
+	// 	_EDIT_VIDEO.style.display = 'inline';
+	// });
+
+	// document.querySelector("#btn-upload-img-edit").addEventListener('click', function() {
+	// 	document.getElementById('file-to-upload-edit').value = '';
+	// 	$("#video-edit-container").addClass('d-none');
+	// });
+</script>
