@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  follower: one
+  following: one
+  status: 1
+
+two:
+  follower: two
+  following: two
+  status: 1
