@@ -12,28 +12,28 @@
 </head>
 
 <body>
+  <% if notice %>
+    <p class="alert alert-success">
+      <%= notice %>
+      <button class="close" data-dismiss="alert">x</button>
+    </p>
+  <% end %>
+
+  <% if alert %>
+    <p class="alert alert-danger">
+      <%= alert %>
+      <button class="close" data-dismiss="alert">x</button>
+    </p>
+  <% end %>
 
   <% if controller_name == "users"%>
-  <%= render 'layouts/navbar_user'%>
+    <%= render 'layouts/navbar_user'%>
   <% end %>
-  <% if controller_name == "dashboards" %>
-  <%= render 'layouts/navbar_dashboards' %>
-  <% end %>
+
   <%= yield %>
-  <% if notice %>
-  <p class="alert alert-success">
-    <%= notice %>
-    <button class="close" data-dismiss="alert">x</button>
-  </p>
-  <% end %>
-  <% if alert %>
-  <p class="alert alert-danger">
-    <%= alert %>
-    <button class="close" data-dismiss="alert">x</button>
-  </p>
-  <% end %>
+
   <% if controller_name != 'sessions'%>
-  <%= render 'layouts/footer' %>
+    <%= render 'layouts/footer' %>
   <% end %>
 </body>
 </html>

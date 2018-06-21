@@ -1,43 +1,42 @@
 <h3>List of User</h3>
-<div class="container-fluid">
-  <div class="mr-auto">
-    <%= link_to 'Create post', '#', class: 'btn btn-primary' %>
-  </div>
-  <div class="table-responsive">
-    <table class="table table-striped">
-      <thead class="thead-dark">
-        <tr>
-          <th scope="col">Id</th>
-          <th scope="col">Content</th>
-          <th scope="col">Pictures</th>
-          <th scope="col">User Id</th>
-          <th scope="col">Created At</th>
-          <th scope="col">Action</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% if @posts.count > 0 %>
-          <% @posts.each do |u| %>
-            <tr>
-              <th scope="row"><%= u.id %></th>
-              <td><%= u.content %></td>
-              <td><% u.pictures.each do |p| %>
-                    <%= image_tag p.image.url(:thumb) %>
-                    <br>
-                  <% end %>
-              </td>
-              <td><%= u.user_id %></td>
-              <td><%= u.created_at %></td>
-              <td><%= link_to 'Show', admins_user_path(u), method: :get %> | <%= link_to 'Edit', edit_admins_user_path(u) %> | <%= link_to 'Delete', admins_user_path(u),method: :delete , data: { confirm: 'Are you sure?' } %> </td>
-            </tr>
-          <% end %>
-        <% else %>
+<div class="mr-auto">
+  <%= link_to 'Create post', '#', class: 'btn btn-primary' %>
+</div>
+<div class="table-responsive">
+  <table class="table table-striped">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">Id</th>
+        <th scope="col">Content</th>
+        <th scope="col">Pictures</th>
+        <th scope="col">User Id</th>
+        <th scope="col">Created At</th>
+        <th scope="col">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% if @posts.count > 0 %>
+        <% @posts.each do |u| %>
           <tr>
-            <td colspan="7">No one use your vinogram. Poor you :( .</td>
+            <th scope="row"><%= u.id %></th>
+            <td><%= u.content %></td>
+            <td><% u.pictures.each do |p| %>
+                  <%= image_tag p.image.url(:thumb) %>
+                  <br>
+                <% end %>
+            </td>
+            <td><%= u.user_id %></td>
+            <td><%= u.created_at %></td>
+            <td><%= link_to 'Show', admins_user_path(u), method: :get %> | <%= link_to 'Edit', edit_admins_user_path(u) %> | <%= link_to 'Delete', admins_user_path(u),method: :delete , data: { confirm: 'Are you sure?' } %> </td>
           </tr>
         <% end %>
-      </tbody>
-    </table>
-  </div>
+      <% else %>
+        <tr>
+          <td colspan="7">No one use your vinogram. Poor you :( .</td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
 </div>
+
 

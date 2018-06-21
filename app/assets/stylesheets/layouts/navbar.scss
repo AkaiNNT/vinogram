@@ -24,7 +24,7 @@
     background: url('search-icon.png');
     background-size: 20px;
     background-repeat: no-repeat;
-    background-position: 62px 0;
+    background-position: 62px 7px;
   }
   input:focus {
     padding-left: 16px;
@@ -33,6 +33,15 @@
 
   a{
     color: black;
+  }
+
+  .form-group{
+    margin: 0;
+  }
+
+  .form-control{
+    height: 30px;
+    background-position: 62px 4px;
   }
 }
 
@@ -84,7 +93,7 @@
   }
 }
 
-@media (max-width: 575.98px) { 
+@media (max-width: 575.98px) {
   .brand{
     display: none;
   }
@@ -99,7 +108,7 @@
   }
 
 }
-@media (min-width: 576px) and (max-width: 767.98px){ 
+@media (min-width: 576px) and (max-width: 767.98px){
   .brand{
     display: none;
   }
@@ -113,7 +122,7 @@
 
 }
 
-@media (min-width: 768px) and (max-width: 991.98px){ 
+@media (min-width: 768px) and (max-width: 991.98px){
   .navbar_icon{
     flex-direction: row !important;
     li {

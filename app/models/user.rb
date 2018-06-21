@@ -15,5 +15,4 @@ class User < ApplicationRecord
 
   validates :full_name, :presence => true
   validates :full_name, :length => { :minimum => 3 },if: -> { self.full_name.present? }
-
 end
