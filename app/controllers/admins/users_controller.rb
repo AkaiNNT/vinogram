@@ -3,10 +3,10 @@ class Admins::UsersController < Admins::BaseController
   before_action :search_form
   def index
     if params[:search].to_s == ""
-      @users = User.all.order(created_at: :desc)
+      @users = User.all.order(created_at: :desc).paginate(:page => params[:page], :per_page => 5)
     else
       search = params[:search]
-      @users = User.where("email || ' ' || full_name || ' ' || contact_number ILIKE ?", "%#{search}%")
+      @users = User.where("email || ' ' || full_name || ' ' || contact_number ILIKE ?", "%#{search}%").paginate(:page => params[:page], :per_page => 5)
     end
   end
 
