@@ -30,13 +30,16 @@ class PostsController < ApplicationController
     end
   end
 
-  def edit;  end
+  def edit ; end
 
   def update
     if @post.update_attributes(post_params)
-      redirect_to posts_path
-    else
-      render :edit
+      if @post.errors.full_messages.present?
+        flash[:danger] = @post.errors.full_messages.join(", ")
+        render :edit
+      else
+        redirect_to posts_path
+      end
     end
   end
 
@@ -52,7 +55,7 @@ class PostsController < ApplicationController
   end
 
   def post_params
-      params.required(:post).permit(:content,:attachment, pictures_attributes: [:id, :image, :_destroy])
+      params.required(:post).permit(:content,:attachment,:img_reader,:video_reader, pictures_attributes: [:id, :image, :_destroy])
   end
 
 end

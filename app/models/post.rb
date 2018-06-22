@@ -1,11 +1,15 @@
 class Post < ApplicationRecord
+  attr_accessor :img_reader, :video_reader
+  before_update :callback_parse_params
+  after_update_commit :callback_attachment
+
   belongs_to :user
   has_many :pictures, as: :imageable, dependent: :destroy
   has_many :likes,                    dependent: :destroy
   has_many :comments,                 dependent: :destroy
 
   accepts_nested_attributes_for :pictures, reject_if: :all_blank, allow_destroy: true
-  validate :has_pictures?
+  validate :has_content?, :on => :create
 
   has_attached_file :attachment, styles: {
     medium: {geometry: "640x480", format:'mp4', convert_options: {
@@ -22,12 +26,30 @@ class Post < ApplicationRecord
   validates_attachment :attachment, size: {less_than: 130.megabytes}
 
 
-  def has_pictures?
+  def has_content?
+
     if (self.pictures.present? && self.attachment.present? )
       errors.add(:base,"Post must has only pictures or video")
-    elsif (self.pictures.blank? && self.attachment.blank?)
+    elsif (!self.pictures.present? && !self.attachment.present? )
       errors.add(:base, "Post must has at least one picture or one video.")
+    end
+    
+  end
+
+  def callback_parse_params
+    if self.img_reader == "true"
+      self.attachment = nil
     end
   end
 
+  def callback_attachment
+    if self.video_reader == "true"
+      self.pictures.destroy_all
+    end
+
+    if (!self.pictures.present? && !self.attachment.present? )
+      errors.add(:base, "Post must has at least one picture or one video.")
+    end
+  end
+  
 end

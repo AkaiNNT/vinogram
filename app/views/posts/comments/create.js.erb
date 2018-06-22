@@ -1,0 +1,2 @@
+$('#myInput_<%=@post.id%>').val("");
+$(".all_comments_<%=@post.id%>").append("<%= j render 'posts/comments/comment', comment: @comment %>");

@@ -3,19 +3,26 @@
     <%= f.input :content, label: false, required: true, autofocus: true, placeholder: "What's on your mind today?" %>
   </div>
   <div class="form-actions">
+  	<%= f.input :img_reader ,as: :boolean, checked_value: true, unchecked_value: false, input_html: {class: "d-none", id: "up_image"}, label: false %>
   	<div class="row" id="add-cocoon">
-			<div id="video-demo-container" class="d-none video-container">
-				<video id="main-video" controls class="show-video">
-					<source type="video/mp4">
+  		<%= f.fields_for :pictures do |pic| %>
+        <%= render 'picture_fields', :f => pic %>
+      <% end %>
+		</div>
+		<%= f.input :video_reader ,as: :boolean, checked_value: true, unchecked_value: false , input_html: {class: "d-none", id: "up_video"}, label: false %>
+		<div class="row" id="video_attr">
+			<div id="video-demo-container" class="video-container">
+				<video id="main-video" controls class="show-video" >
+					<source src="<%= @post.attachment.url %>" type="video/mp4"> 
 				</video>
 			</div>
 		</div>
+			
 		<div class="eventUploadVideo">
-	  	<%= f.file_field :attachment,id: "file-to-upload" , class: "d-none", accept: 'video/mp4' %>
+		  <%= f.file_field :attachment,id: "file-to-upload" , class: "d-none", accept: 'video/mp4' %>
 		</div>
 		<div class="links">
 	    <%= link_to_add_association '<button type="button" class="btn btn-default" id="btn-upload-img"><i class="fa fa-camera"></i></button>'.html_safe, f, :pictures, id: 'link-add-pic' %>
-
 	    <button type="button" class="btn btn-default" id="upload-button" ><i class="fa fa-video-camera"></i><label class="text-right"></label></button>
 	  	<%= f.button :submit, "Post" , :class => "btn btn-outline-primary btn-post"%>
 	  </div>
@@ -29,10 +36,3 @@
   </div>
 <% end %>
 
-<script type="text/javascript">
-	  $(document).ready(function() {
-    $("#link-add-pic").
-      data("association-insertion-method", 'append').
-      data("association-insertion-node", '#add-cocoon');
-  });
-</script>

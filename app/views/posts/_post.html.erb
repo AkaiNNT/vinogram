@@ -15,7 +15,9 @@
 								<div class="nav-item dropdown float-right">
 							    <a class="nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">...</a>
 							    <div class="dropdown-menu">
-							    	<%= link_to "Edit", edit_post_path(post), class: "dropdown-item", "data-toggle": "modal", "data-target": "#editPost_#{post.id}" %>
+							    	<%#= link_to "Edit", edit_post_path(post), class: "dropdown-item", "data-toggle": "modal", "data-target": "#editPost_#{post.id}" %>
+							    	<%= link_to "Edit", edit_post_path(post), class: "dropdown-item" %>
+							    	
 							    	<%= link_to "Delete", post_path(post), class: "dropdown-item",method: :delete, data: {confirm: "Are you sure?"}%>
 							    </div>
 							  </div>
@@ -44,20 +46,28 @@
 						</section>
 					<% end %>
 					<% if post.comments.present? %>	
-						<section class="all_comments">
-							<% post.comments.each do |comment| %>
-								<%= render "posts/comments/comment", comment: comment %>
-							<% end %>
+						<section class="all_comments_<%=post.id%>">
+							<% if post.comments.count > 4%>
+								<div class="view-all-comment"><%= link_to "View all comments", post_path(post) %></div>
+								<% post.comments.last(4).each do |comment| %>
+									<%= render "posts/comments/comment", comment: comment %>
+								<% end %>
+							<% else %>
+								<% post.comments.each do |comment| %>
+									<%= render "posts/comments/comment", comment: comment %>
+								<% end %>	
+							<% end %>	
 						</section>
 					<% end %>
 					<p class="text-time-post"><%= link_to "#{time_ago_in_words(post.created_at)} ago", post_path(post) %></p>
 					<hr>
 					<section class="create_comment">
-						<%= simple_form_for post.comments.build ,url: post_comments_path(post), html: {id: "myForm_#{post.id}"} , method: :post do |form| %>
+						<%= simple_form_for post.comments.build ,url: post_comments_path(post), html: {id: "myForm_#{post.id}"} , method: :post, remote: true do |form| %>
 							<div class="comment-form ">
 								<form class="form-inline">
 									<div class="form-group">
-										<%= form.input :content ,placeholder: 'Add a comment...',label: false, input_html: { class: 'content-comment', id: "myInput_#{post.id}" }, row: 10 %>
+										<%= form.input :content ,placeholder: 'Add a comment...',label: false, input_html: { class: 'content-comment', id: "myInput_#{post.id}" }, row: 5 %>
+										<%= form.submit "submit", class: "d-none" ,id: "submit_comment_#{post.id}"%>
 									</div>
 								</form>
 							</div>
@@ -82,18 +92,11 @@
 		input.addEventListener("keyup", function(event) {
 		    event.preventDefault();
 		    if (event.keyCode === 13) {
-		        document.getElementById("myForm_<%=post.id%>").submit();
+		        document.getElementById("submit_comment_<%=post.id%>").click();
 		    }
 		});
 	}
-	$('#editPost_<%=post.id%>').on('show.bs.modal', function() {
-    // do something when the modal is shown
-		$(document).ready(function() {
-	    $("#link-edit_<%= post.id%>").
-	      data("association-insertion-method", 'append').
-	      data("association-insertion-node", '#edit-cocoon_<%post.id%>');
-	  });
-	}
+
 
 
 </script>

@@ -1,17 +1,29 @@
 class Posts::CommentsController < ApplicationController
   before_action :set_post ,only: [:create, :update, :destroy]
-  before_action :set_cmt ,only: [:destroy]
+  before_action :set_cmt ,only: [:destroy, :update]
 
   def create
     @comment = @post.comments.create(content: params[:comment][:content],user_id: current_user.id)
     unless @comment.errors.present?
-     redirect_to posts_path
+      respond_to do |format|
+        format.html { redirect_to post_path }
+        format.js
+      end
+    end
+  end
+
+  def update
+    @comment.update(comment_params)
+    respond_to do |format|
+      format.js
     end
   end
 
   def destroy
     @comment.destroy
-    redirect_to post_path(@post)
+    respond_to do |format|
+      format.js
+    end
   end
 
   private

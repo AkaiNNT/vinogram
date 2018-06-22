@@ -1,0 +1,67 @@
+<%= render 'create_post' %>
+<script type="text/javascript">
+
+	if (<%= @post.attachment.present? %>) {
+		$('#main-video').css('display','inline');
+  }
+ //////////////////////////PREVIEW VIDEO//////////////////////////////////
+	var _VIDEO = document.querySelector("#main-video");
+
+
+
+	// When user chooses a MP4 file
+	document.querySelector("#file-to-upload").addEventListener('change', function() {
+		// Validate whether MP4
+    if(['video/mp4'].indexOf(document.querySelector("#file-to-upload").files[0].type) == -1) {
+        alert('Error : Only MP4 format allowed');
+        return;
+    }
+
+		// Object Url as the video source
+		document.querySelector("#main-video source").setAttribute('src', URL.createObjectURL(document.querySelector("#file-to-upload").files[0]));
+		// Load the video and show it
+			_VIDEO.load();
+			_VIDEO.style.display = 'inline';
+	});
+
+	document.querySelector("#upload-button").addEventListener('click', function() {
+		document.querySelector("#file-to-upload").click();
+		$("#add-cocoon").addClass("d-none");		
+		$('#video-demo-container').removeClass('d-none');
+		$("#up_video").prop("checked",true);
+		$("#up_image").prop("checked",false);
+		$("#add-cocoon").find(".nested-fields").each(function(){
+			$(this).find(".btn-logo").click();
+		});
+	});
+
+	document.querySelector("#btn-upload-img").addEventListener('click', function() {
+		$("#video-demo-container").addClass('d-none');
+		$("#add-cocoon").removeClass("d-none");
+		$("#up_video").prop("checked",false);
+		$("#up_image").prop("checked",true);
+	});
+	
+	$(document).ready(function() {
+    $("#link-add-pic").
+      data("association-insertion-method", 'append').
+      data("association-insertion-node", '#add-cocoon');
+  });
+
+
+
+	if (<%= @post.attachment.present? %>) {
+		$("#up_video").prop("checked",true);
+		$("#up_image").prop("checked",false);
+	}
+	else{
+		$("#up_video").prop("checked",false);
+		$("#up_image").prop("checked",true);
+	}
+
+
+
+
+
+
+</script>
