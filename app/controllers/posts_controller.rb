@@ -1,5 +1,6 @@
 class PostsController < ApplicationController
   before_action :set_post ,only: [:update, :edit, :destroy]
+  before_action :set_posts , only: [:index,:create]
   def new
     @post = Post.new
   end
@@ -11,8 +12,6 @@ class PostsController < ApplicationController
 
   def index
     @post = Post.new
-    @posts = Post.all.order('created_at desc').paginate(:page => params[:page], :per_page => 6 )
-
   end
   
   def create
@@ -26,7 +25,7 @@ class PostsController < ApplicationController
       redirect_to posts_path
     else
       flash[:danger] = @post.errors.full_messages.join(", ")
-      redirect_to posts_path
+      render :index
     end
   end
 
@@ -56,6 +55,10 @@ class PostsController < ApplicationController
 
   def post_params
       params.required(:post).permit(:content,:attachment,:img_reader,:video_reader, pictures_attributes: [:id, :image, :_destroy])
+  end
+
+  def set_posts
+    @posts = Post.all.order('created_at desc').paginate(:page => params[:page], :per_page => 6 )
   end
 
 end

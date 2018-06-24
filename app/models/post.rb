@@ -6,6 +6,7 @@ class Post < ApplicationRecord
   belongs_to :user
   has_many :pictures, as: :imageable, dependent: :destroy
   has_many :likes,                    dependent: :destroy
+  has_many :liking_users, :through => :likes, :source => :user
   has_many :comments,                 dependent: :destroy
 
   accepts_nested_attributes_for :pictures, reject_if: :all_blank, allow_destroy: true
@@ -38,13 +39,13 @@ class Post < ApplicationRecord
 
   def callback_parse_params
     if self.img_reader == "true"
-      self.attachment = nil
+      self.attachment = nil if self.pictures.present?
     end
   end
 
   def callback_attachment
     if self.video_reader == "true"
-      self.pictures.destroy_all
+      self.pictures.destroy_all if self.attachment.present?
     end
 
     if (!self.pictures.present? && !self.attachment.present? )
