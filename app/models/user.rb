@@ -5,6 +5,7 @@ class User < ApplicationRecord
     :recoverable, :rememberable, :trackable, :validatable
   has_many :posts, dependent: :destroy
   has_many :likes, dependent: :destroy
+  has_many :liked_posts, :through => :likes, :source => :post
   has_many :followers, class_name: "Following", foreign_key: 'following_id'
   has_many :followings, class_name: "Following", foreign_key: 'follower_id'
   has_attached_file :avatar, styles: { medium: "300x300>", thumb: "100x100>" }, default_url: "/images/users/default_images.jpeg"

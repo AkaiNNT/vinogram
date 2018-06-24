@@ -1,0 +1,7 @@
+<% if @post.liking_users.include? current_user %> 
+	$('.heart_<%=@post.id%>').removeClass('fa-heart-o').addClass('fa-heart');
+<% else %>
+	$('.heart_<%=@post.id%>').removeClass('fa-heart').addClass('fa-heart-o');
+<% end %>
+var count_like = "<%= @post.likes.count %>" + ("<%= @post.likes.count %>" >= 2 ? " likes":" like");
+$('#count_like_post_<%=@post.id%>').text(count_like);
