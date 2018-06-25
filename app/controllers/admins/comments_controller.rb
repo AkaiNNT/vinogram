@@ -24,6 +24,15 @@ class Admins::CommentsController < Admins::BaseController
     end
   end
 
+  def update
+    if @comment.update(comment_params)
+      flash[:notice] = 'Update successfully'
+      redirect_to edit_admins_comment_path(@comment)
+    else
+      render :edit
+    end
+  end
+
   def destroy
     @comment.destroy
     redirect_to admins_comments_path
