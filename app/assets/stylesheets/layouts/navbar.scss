@@ -43,6 +43,14 @@
     height: 30px;
     background-position: 62px 4px;
   }
+
+  @media(max-width: 340px){
+    input#search{
+      width: 150px;
+      background-position: 33px 4px;
+      padding-left: 52px;
+    }
+  }
 }
 
 .navbar_users{

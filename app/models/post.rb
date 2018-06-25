@@ -8,7 +8,7 @@ class Post < ApplicationRecord
   validate :has_pictures?
 
   has_attached_file :attachment, styles: {
-    medium: {geometry: "640x480", format:'mp4', convert_options: {
+  medium: {geometry: "640x480", format:'mp4', convert_options: {
       input: {},
       output: {
         vcodec: 'libx264',

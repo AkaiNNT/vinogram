@@ -13,7 +13,7 @@ class PostsController < ApplicationController
     @posts = Post.all.order('created_at desc').paginate(:page => params[:page], :per_page => 6 )
 
   end
-  
+
   def create
     @post = Post.new(post_params)
     @post.user_id = current_user.id

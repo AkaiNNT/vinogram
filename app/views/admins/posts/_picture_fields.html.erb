@@ -1,4 +1,4 @@
-<div class="nested-fields col-6 col-md-4 col-lg-3">
+<div class="nested-fields col-10 col-sm-6 col-lg-4">
 	<div class="logo_uploader">
     <% if f.object.image.present? %>
       <img src="<%= f.object.image.url %>" alt="img" class='image-upload'>
@@ -19,12 +19,12 @@
           .closest('.nested-fields')
           .find('img')
           .attr('src', event.target.result)
-          .css('width','150px')
-          .css('height', '100px');
+          .addClass('w-100');
         }
         reader.readAsDataURL(input.files[0]);
       }
     };
+    $('.image_uploader').off();
     $('.image_uploader').on('change', function() {
       imagesPreview(this);
     });
