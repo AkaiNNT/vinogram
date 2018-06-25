@@ -12,7 +12,8 @@ Rails.application.routes.draw do
   root to: "home#index"
 
 
-  resources :users do 
+  resources :users do
+    get 'search', to: 'users#search_navbar', on: :collection
     get 'suggested', to: 'users#suggested', on: :collection
     put 'follow', to: 'users#follow', on: :member
   end

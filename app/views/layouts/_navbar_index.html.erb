@@ -1,0 +1,71 @@
+<div class="nav-layout container-fluid">
+  <div class="d-flex align-items-center">
+    <div class="mr-auto">
+      <%= image_tag 'logo.png', class: 'logo-navbar'%><span class="font-weight-bold brand-name d-none d-sm-inline">VINOGRAM</span>
+    </div>
+    <div class="m-auto">
+      <% if controller_name == 'users' %>
+        <%= simple_form_for @search , url: search_users_path, method: :get do |f| %>
+          <%= f.input :search, label: false, placeholder: 'Search' %>
+        <% end %>
+      <% elsif controller_name == 'posts' %>
+        <%= simple_form_for @search , url: posts_path, method: :get do |f| %>
+          <%= f.input :search, label: false, placeholder: 'Search' %>
+        <% end %>
+      <% end %>
+    </div>
+      <ul class="navbar-nav ml-auto navbar_icon">
+
+    <li class="nav-item">
+      <a class="nav-link" href="#"><i class="fa fa-sun-o" aria-hidden="true"></i></a>
+    </li>
+
+    <!-- dropdown notificaiton-->
+    <li class="nav-item demo dropdown">
+      <a class="nav-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <i class="fa fa-heart-o" aria-hidden="true"></i>
+      </a>
+      <ul class="dropdown-menu notification">
+
+        <li>
+          <div class="row">
+            <div class="col-md-2">
+              <%= image_tag 'default_images.jpeg', class: 'norification_img'%>
+            </div>
+            <div class="col-md-8" >
+              Heo Map Map liked this post.
+            </div>
+            <div class="col-md-2" >
+              <%= image_tag 'default_images.jpeg', class: 'norification_img'%>
+            </div>
+          </div>
+        </li>
+
+        <hr>
+
+        <li>
+          <div class="row">
+            <div class="col-md-2">
+              <%= image_tag 'default_images.jpeg', class: 'norification_img'%>
+            </div>
+            <div class="col-md-8" >
+              Heo Map Map liked this post.
+            </div>
+            <div class="col-md-2" >
+              <%= image_tag 'default_images.jpeg', class: 'norification_img'%>
+            </div>
+          </div>
+        </li>
+      </ul>
+
+    </li>
+
+    <!-- -->
+    <li class="nav-item">
+      <a class="nav-link" href="<%= suggested_users_path %>"><i class="fa fa-user-o" aria-hidden="true">
+
+      </i></a>
+    </li>
+  </ul>
+  </div>
+</div>

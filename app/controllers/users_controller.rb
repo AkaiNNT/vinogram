@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:edit, :update, :show, :follow_show, :follow]
+  before_action :search_form
   def edit
   end
 
@@ -9,9 +10,6 @@ class UsersController < ApplicationController
     else
       render 'edit'
     end
-  end
-
-  def show
   end
 
   def suggested
@@ -32,14 +30,30 @@ class UsersController < ApplicationController
 
   end
 
-def set_user
-   @user = User.find(params[:id])
- end
- private 
- def following_params
-  params.require(:following).permit(:following, :follower, :status)
-end
-def user_params
-  params.require(:user).permit(:fullname, :contact_number, :contact_area, :description, :avatar, :status)
-end
+  def set_user
+    @user = User.find(params[:id])
+  end
+
+  def search_navbar
+    if params[:search].to_s == ""
+      @users = User.all.order(created_at: :desc).paginate(:page => params[:page], :per_page => 5)
+    else
+      search = params[:search]
+      @users = User.where("email || ' ' || full_name || ' ' || contact_number ILIKE ?", "%#{search}%").paginate(:page => params[:page], :per_page => 5)
+    end
+  end
+
+  private
+
+  def following_params
+    params.require(:following).permit(:following, :follower, :status)
+  end
+
+  def user_params
+    params.require(:user).permit(:fullname, :contact_number, :contact_area, :description, :avatar, :status)
+  end
+
+  def search_form
+    @search = ""
+  end
 end
