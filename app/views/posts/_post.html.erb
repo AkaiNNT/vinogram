@@ -30,37 +30,42 @@
 						<% else %>
 							<%= link_to "<i class='fa fa-heart-o fa-2x heart_#{post.id}'></i>".html_safe, post_likes_path(post), method: :post , remote: true%>
 						<% end %>
-						<%= link_to "<i class='fa fa-comment-o fa-2x icon-comment'></i>".html_safe, "#", id: "icon_cmt_#{post.id}", "data-post-id": "#{post.id}" %>
+						<%#= link_to "<i class='fa fa-comment-o fa-2x icon-comment'></i>".html_safe, "data-post-id": "#{post.id}", class: "js-comment" %>
+						<i class='fa fa-comment-o fa-2x icon-comment js-comment' data-post-id= "<%=post.id%>"></i>
 						<%= link_to "<i class='fa fa-bookmark-o fa-2x float-right'></i>".html_safe%>
 					</section>
 					<section class="count_like">
-						<a href="#"><b id="count_like_post_<%=post.id%>"><%= post.likes.count%>
+						<b id="count_like_post_<%=post.id%>"><%= post.likes.count%>
 							<% if post.likes.count >= 2%>
 								likes
 							<% else %>
 								like
 							<% end %>
-						</b></a>
+						</b>
 					</section>
 					<% if post.content.present? %>
 						<section class="content_post">
 							<p><b><%= post.user.full_name %></b> <%= post.content.truncate(100) %></p>
 						</section>
 					<% end %>
-					<% if post.comments.present? %>	
-						<section class="all_comments_<%=post.id%>">
-							<% if post.comments.count > 4%>
-								<div class="view-all-comment"><%= link_to "View all comments", post_path(post) %></div>
-								<% post.comments.last(4).each do |comment| %>
+					<section class="all_comments_<%=post.id%>">
+						<% if post.comments.count > 4%>
+							<% if showallcomment == true %>
+								<% post.comments.order(created_at: :asc).each do |comment| %>
 									<%= render "posts/comments/comment", comment: comment %>
 								<% end %>
-							<% else %>
-								<% post.comments.each do |comment| %>
+							<% else %>	
+								<div class="view-all-comment"><%= link_to "View all comments", post_path(post) %></div>
+								<% post.comments.order(created_at: :asc).last(4).each do |comment| %>
 									<%= render "posts/comments/comment", comment: comment %>
-								<% end %>	
+								<% end %>
+							<% end %>
+						<% else %>
+							<% post.comments.order(created_at: :asc).each do |comment| %>
+								<%= render "posts/comments/comment", comment: comment %>
 							<% end %>	
-						</section>
-					<% end %>
+						<% end %>	
+					</section>
 					<p class="text-time-post"><%= link_to "#{time_ago_in_words(post.created_at)} ago", post_path(post) %></p>
 					<hr>
 					<section class="create_comment">

@@ -1,5 +1,5 @@
 <div id="comment_<%=comment.id%>">
-	<b><%= comment.user.full_name %></b> <span id="edit_cmt_<%= comment.id%>"><%= comment.content %></span>
+	<b><%= comment.user.full_name %></b> <span id="edit_cmt_<%= comment.id%>"><%= comment.content.gsub(/\n/, ' ') %></span>
   <% if current_user.id == comment.user.id %>	
     <div class="dropdown float-right">
   	  <a data-toggle="dropdown" href="">```</a>
@@ -13,14 +13,14 @@
 	<br>
 </div>
 
-<%= simple_form_for(comment, url: post_comment_path(comment.post, comment),remote: true) do |f| %>
-  <div class="modal fade" id="editmycmt_<%= comment.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h4 class="modal-title" id="myModalLabel">Edit Comment</h4>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        </div>
+<div class="modal fade" id="editmycmt_<%= comment.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="myModalLabel">Edit Comment</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      </div>
+      <%= simple_form_for(comment, url: post_comment_path(comment.post, comment),remote: true) do |f| %>
         <div class="modal-body">
 					<%= f.input :content ,label: false %>
         </div>
@@ -28,7 +28,7 @@
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 					<%= f.submit :Comment ,:class => "btn btn-primary" %>
         </div>
-      </div>
+      <% end %>
     </div>
   </div>
-<% end %>
+</div>
