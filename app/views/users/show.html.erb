@@ -11,23 +11,25 @@
 
      <div class="col-md-8">
       <div class="row">
-       <h4 class="name_field"><%= @user.full_name%></h4>
-       <div class="edit_profile_link">
-         <%= link_to 'Edit Profile', edit_user_path(@user), class: 'button'%>
-       </div>
+        <h4 class="name_field"><%= @user.full_name%></h4>
+        <% if @user == current_user %> 
+          <div class="edit_profile_link">
+            <%= link_to 'Edit Profile', edit_user_path(current_user), class: 'button'%>
+          </div>
+        <% end %>
      </div>
      <div class="row info">
        <ul>
-         <li><strong>69</strong> posts</li>
-         <li><strong>100</strong> follower</li>
-         <li><strong>62</strong> following</li>
+         <li><strong><%=@user.posts.count%></strong> posts</li>
+         <li><strong><%= @user.followers.count %></strong> follower</li>
+         <li><strong><%= @user.followings.count %></strong> following</li>
        </ul>
      </div>
      <div class="row ">
       <span class="info_description">
-       <strong><%= @user.email%> </strong>
+       <strong><%= @user.email%></strong>
        <%if @user.description%> 
-       :<%= @user.description%>
+       : <%= @user.description%>
        <%end%>
      </span>
      </div>
@@ -41,17 +43,10 @@
     <h7>SHOW ALL POSTS</h7>
   </div>
   <div class="posts row">
-    <div class="col-md-4">
-      <button type="button" class="modal_btn" data-toggle="modal" data-target="#exampleModal">
-        <%= image_tag 'default_images.jpeg', class: 'post_img'%>
-      </button>
-      <!-- start modal-->
-      <%= render 'modal_show' %>
-      <!-- end modal -->
-    </div>
-    <div class="col-md-4"><%= image_tag 'default_images.jpeg', class: 'post_img'%></div>
-    <div class="col-md-4"><%= image_tag 'default_images.jpeg', class: 'post_img'%></div>
-    </div>
+    <% @user.posts.order(created_at: :desc).each do |post|%>
+      <%= render 'users/posts/post' ,post: post %>
+    <% end %>
+  </div>
 
 
   </section>

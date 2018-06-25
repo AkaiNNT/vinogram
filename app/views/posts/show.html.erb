@@ -1,3 +1,15 @@
 <div class="container">
 	<%= render 'post', post: @post , showallcomment: true %>
 </div>
+<script type="text/javascript">
+	$('.js-comment').click(function(){
+			var post_id = '#myInput_' + $(this).data('post-id');
+			console.log(post_id);
+			// text_area = $('.container').find(post_id);
+			// text_area.focus();
+			setTimeout(function() {
+				$('.container').find(post_id).focus();
+			}, 100);
+			// $(this).closest('.card').find('.content-comment').focus();
+		});
+</script>

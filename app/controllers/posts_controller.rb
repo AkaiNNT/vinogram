@@ -71,4 +71,4 @@ class PostsController < ApplicationController
     @search = ""
   end
   
-end
+end 

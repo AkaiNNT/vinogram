@@ -1,8 +1,7 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:edit, :update, :show, :follow_show, :follow]
+  before_action :set_user, only: [:show, :follow_show, :follow]
+  before_action :set_current_user, only: [:edit, :update]
   before_action :search_form
-  def edit
-  end
 
   def update
     if @user.update(user_params)
@@ -30,9 +29,6 @@ class UsersController < ApplicationController
 
   end
 
-  def set_user
-    @user = User.find(params[:id])
-  end
 
   def search_navbar
     if params[:search].to_s == ""
@@ -44,6 +40,14 @@ class UsersController < ApplicationController
   end
 
   private
+
+  def set_user
+    @user = User.find(params[:id])
+  end
+
+  def set_current_user
+    @user = current_user
+  end
 
   def following_params
     params.require(:following).permit(:following, :follower, :status)

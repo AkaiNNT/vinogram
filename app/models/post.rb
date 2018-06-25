@@ -21,7 +21,7 @@ class Post < ApplicationRecord
         strict: :experimental
       }
     }},
-    thumb: {geometry: "100x100#", format:'jpg', time: 10}
+    thumb: {geometry: "100x100#", format:'jpg', time: 1}
   }, processors: [:transcoder]
   validates_attachment_content_type :attachment, content_type: /\Avideo\/.*\Z/
   validates_attachment :attachment, size: {less_than: 130.megabytes}
