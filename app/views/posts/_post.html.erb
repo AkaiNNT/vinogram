@@ -35,13 +35,13 @@
 						<%= link_to "<i class='fa fa-bookmark-o fa-2x float-right'></i>".html_safe%>
 					</section>
 					<section class="count_like">
-						<b id="count_like_post_<%=post.id%>"><%= post.likes.count%>
+						<a href="#"><b id="count_like_post_<%=post.id%>"><%= post.likes.count%>
 							<% if post.likes.count >= 2%>
 								likes
 							<% else %>
 								like
 							<% end %>
-						</b>
+						</b></a>
 					</section>
 					<% if post.content.present? %>
 						<section class="content_post">
