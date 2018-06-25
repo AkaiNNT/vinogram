@@ -1,7 +1,7 @@
 <div class="container">
 		<%= render "create_post" %>
 		<br>
-		<%= render @posts %>
+		<%= render @posts, showallcomment: false %>
 		<%= will_paginate @posts %>
 </div>
 
@@ -40,9 +40,22 @@
 	});
 	
 	$(document).ready(function() {
+    
     $("#link-add-pic").
       data("association-insertion-method", 'append').
       data("association-insertion-node", '#add-cocoon');
+		
+		$('.js-comment').click(function(){
+			var post_id = '#myInput_' + $(this).data('post-id');
+			console.log(post_id);
+			// text_area = $('.container').find(post_id);
+			// text_area.focus();
+			setTimeout(function() {
+				$('.container').find(post_id).focus();
+			}, 100);
+			// $(this).closest('.card').find('.content-comment').focus();
+		});
+
   });
 
   

@@ -70,4 +70,5 @@ class PostsController < ApplicationController
   def search_form
     @search = ""
   end
+  
 end
