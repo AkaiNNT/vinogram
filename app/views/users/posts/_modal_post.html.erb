@@ -1,0 +1,86 @@
+  <div class="modal fade" id="postModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog post_modal" role="document">
+      <div class="modal-content">
+        <div class="row">
+          <div class="col-md-8 img_video_post">
+            <%= render 'show_img_video', post: post %>
+          </div>
+          <div class="col-md-4">
+            <div class="modal-header">
+              <div class="modal-title" id="exampleModalLabel">
+                <div class="">
+                 <%= image_tag (post.user.avatar.url),id: 'avatar_img_modal'%>
+                 <strong><%= post.user.full_name  %></strong>
+               </div>
+
+             </div>
+             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body main-body">
+            <section class="content_post_and_comment">
+              <% if post.content.present? %>
+                <p><b><%= post.user.full_name %></b> <%= post.content %></p>
+              <% end %>
+            <!-- show all comments of this post -->
+               <div class="all_comments_<%=post.id%>">
+                <% post.comments.order(created_at: :asc).each do |comment| %>
+                  <%= render 'posts/comments/comment' , comment: comment%>
+                <% end %>
+               </div> 
+            <!-- end -->
+            </section>
+
+            <div class="footer">
+              <div class="modal-footer footer_liked_follower">
+                <div class="row">
+                  <div class="col-md-12">
+                    <ul>
+                      <li class="li_left">
+                        <% if post.liking_users.include? current_user %>
+                          <%= link_to "<i class='fa fa-heart fa-2x heart_#{post.id} red-heart'></i>".html_safe, post_likes_path(post), method: :post , remote: true%>
+                        <% else %>
+                          <%= link_to "<i class='fa fa-heart-o fa-2x heart_#{post.id}'></i>".html_safe, post_likes_path(post), method: :post , remote: true%>
+                        <% end %>
+                      </li>
+                      <li class="li_left"><i class="fa fa-comment-o js-comment" data-post-id= "<%=post.id%>"></i></li>
+                    </ul>
+                  </div>
+                  <div class="col-md-12">
+                    <!-- show all follower who liked this post -->
+                    <section class="count_like">
+                      <a href="#"><b id="count_like_post_<%=post.id%>"><%= post.likes.count%>
+                        <% if post.likes.count >= 2%>
+                          likes
+                        <% else %>
+                          like
+                        <% end %>
+                      </b></a>
+                    </section>
+                    <p class="text-time-post"><%=time_ago_in_words(post.created_at)%> ago</p>
+                  </div>
+                </div>
+              </div>
+              <div class="modal-footer form-show-post">
+                <!-- add comment for this post-->
+                <%= simple_form_for post.comments.build ,url: post_comments_path(post), html: {id: "myForm_#{post.id}"} , method: :post, remote: true do |form| %>
+                  <div class="comment-form">
+                    <form class="form-inline">
+                      <div class="form-group">
+                        <%= form.input :content ,placeholder: 'Add a comment...',label: false, input_html: { class: 'content-comment', id: "myInput_#{post.id}" ,type:  "text"}, row: 5 %>
+                        <%= form.submit "submit", class: "d-none" ,id: "submit_comment_#{post.id}"%>
+                      </div>
+                    </form>
+                  </div>
+                <% end %>
+                <i class="fa fa-ellipsis-h"></i>
+              </div>
+            </div>
+            <!-- end 'add comment for this post'-->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

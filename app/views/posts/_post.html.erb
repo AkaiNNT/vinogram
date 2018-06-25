@@ -13,7 +13,7 @@
 							<%= link_to post.user.full_name, user_path(post.user), :class => "name-user", :'data-toggle' => :tooltip, :title => post.created_at.strftime("At %r")%>
 							<% if post.user == current_user %>
 								<div class="nav-item dropdown float-right">
-							    <a data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">...</a>
+							    <a data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-ellipsis-h"></i></a>
 							    <div class="dropdown-menu">
 							    	<%= link_to "Edit", edit_post_path(post), class: "dropdown-item" %>
 							    	<%= link_to "Delete", post_path(post), class: "dropdown-item",method: :delete, data: {confirm: "Are you sure?"}%>
@@ -26,13 +26,12 @@
 					<section class="like_and_cmt">
 						<br>
 						<% if post.liking_users.include? current_user %>
-							<%= link_to "<i class='fa fa-heart fa-2x heart_#{post.id}'></i>".html_safe, post_likes_path(post), method: :post , remote: true%>
+							<%= link_to "<i class='fa fa-heart fa-2x heart_#{post.id} red-heart'></i>".html_safe, post_likes_path(post), method: :post , remote: true%>
 						<% else %>
 							<%= link_to "<i class='fa fa-heart-o fa-2x heart_#{post.id}'></i>".html_safe, post_likes_path(post), method: :post , remote: true%>
 						<% end %>
 						<%#= link_to "<i class='fa fa-comment-o fa-2x icon-comment'></i>".html_safe, "data-post-id": "#{post.id}", class: "js-comment" %>
 						<i class='fa fa-comment-o fa-2x icon-comment js-comment' data-post-id= "<%=post.id%>"></i>
-						<%= link_to "<i class='fa fa-bookmark-o fa-2x float-right'></i>".html_safe%>
 					</section>
 					<section class="count_like">
 						<a href="#"><b id="count_like_post_<%=post.id%>"><%= post.likes.count%>

@@ -1,7 +1,8 @@
 <div class="container">
-	<%= render 'post', post: @post , showallcomment: true %>
+	<%= render 'users/posts/modal_post' , post: @post %>
 </div>
 <script type="text/javascript">
+	$('#postModal').modal('show');
 	$('.js-comment').click(function(){
 			var post_id = '#myInput_' + $(this).data('post-id');
 			console.log(post_id);
@@ -12,4 +13,21 @@
 			}, 100);
 			// $(this).closest('.card').find('.content-comment').focus();
 		});
+	var input = document.getElementById("myInput_<%=@post.id%>");
+	if (input) {
+		input.addEventListener("keyup", function(event) {
+		    event.preventDefault();
+		    if (event.keyCode === 13) {
+		        document.getElementById("submit_comment_<%=@post.id%>").click();
+		    }
+		});
+	}
+  $('#postModal').on('hidden.bs.modal', function () {
+    // do something…
+    <% if params[:page_user] == "true" %>
+  		window.location.replace("<%= user_path(@post.user)%>");
+  	<% else %>
+  		window.location.replace("<%= posts_path%>");
+  	<% end %>
+	});	
 </script>
