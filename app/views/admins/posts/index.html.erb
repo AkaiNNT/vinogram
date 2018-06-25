@@ -50,5 +50,10 @@
     </tbody>
   </table>
 </div>
-
+<div class="digg_pagination row">
+  <div class="page_info mx-auto">
+    <%= page_entries_info @posts %>
+  </div><br>
+  <%= will_paginate @posts, :container => false %>
+</div>
 

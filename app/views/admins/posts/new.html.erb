@@ -2,15 +2,18 @@
   <a href="javascript:history.back()" class="btn btn-primary">Back</a>
 </div>
 <div class="row">
-  <div class="col-10 col-sm-8 col-md-6 col-lg-6 mx-auto">
+  <div class="col-12 col-sm-10 col-md-12 col-lg-10 col-xl-8 mx-auto">
     <div class="text-left">
       <h3>Create new post</h3>
       <%= simple_form_for @post, url: admins_posts_path, method: :post do |f| %>
+        <%= f.collection_select :user_id, User.all,:id,:full_name, include_blank: false, class: 'form-control' %>
         <%= f.input :content, autofocus: true, label: false, placeholder: 'Content' %>
+        Post with user name :
+        <br>
         <div class="form-actions">
           <div class="row" id="add-cocoon">
             <div id="video-demo-container" class="d-none">
-              <video id="main-video" controls>
+              <video id="main-video" class="w-50" controls>
                 <source type="video/mp4">
               </video>
             </div>
@@ -22,10 +25,9 @@
             <%= link_to_add_association '<button type="button" class="btn btn-default" id="btn-upload-img"><i class="fa fa-camera"></i></button>'.html_safe, f, :pictures, id: 'link-add-pic' %>
 
             <button type="button" class="btn btn-default" id="upload-button" ><i class="fa fa-video-camera"></i><label class="text-right"></label></button>
-            <%= f.button :submit, "Post" , :class => "btn btn-outline-primary btn-post"%>
+            <%= f.button :submit, "Post" , :class => "btn btn-outline-primary btn-post ml-auto"%>
           </div>
         </div>
-        <%= f.button :submit %>
       <% end %>
     </div>
     <% flash.each do |key, value| %>
@@ -37,4 +39,46 @@
     <% end %>
   </div>
 </div>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+    $("#link-add-pic").
+      data("association-insertion-method", 'append').
+      data("association-insertion-node", '#add-cocoon');
+  });
+
+    var _VIDEO = document.querySelector("#main-video");
+
+  document.querySelector("#upload-button").addEventListener('click', function() {
+    document.querySelector("#file-to-upload").click();
+  });
+
+  // When user chooses a MP4 file
+  document.querySelector("#file-to-upload").addEventListener('change', function() {
+    console.log(URL);
+    // Validate whether MP4
+    if(['video/mp4'].indexOf(document.querySelector("#file-to-upload").files[0].type) == -1) {
+        alert('Error : Only MP4 format allowed');
+        return;
+    }
+
+    // Object Url as the video source
+    document.querySelector("#main-video source").setAttribute('src', URL.createObjectURL(document.querySelector("#file-to-upload").files[0]));
+
+    // Load the video and show it
+    $('#video-demo-container').removeClass('d-none');
+    $('.image_uploader').val(null);
+    $('.nested-fields').addClass('d-none');
+    _VIDEO.load();
+    _VIDEO.style.display = 'inline';
+  });
+
+
+  document.querySelector("#btn-upload-img").addEventListener('click', function() {
+    document.getElementById('file-to-upload').value = '';
+    $("#video-demo-container").addClass('d-none');
+  });
+
+
+</script>
 

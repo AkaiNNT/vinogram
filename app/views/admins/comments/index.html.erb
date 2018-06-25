@@ -29,7 +29,7 @@
             <td><%= c.user.full_name %> / <%= c.user_id %></td>
             <td><%= c.post_id %></td>
             <td><%= c.created_at %> ( <%= time_ago_in_words(c.created_at) %> ago )</td>
-            <td><%= link_to 'Show', admins_comment_path(c), method: :get %> | <%= link_to 'Edit', edit_admins_comment_path(c) %> | <%= link_to 'Delete', admins_comment_path(c),method: :delete %> </td>
+            <td><%= link_to 'Show', admins_comment_path(c), method: :get %> | <%= link_to 'Edit', edit_admins_comment_path(c) %> | <%= link_to 'Delete', admins_comment_path(c),method: :delete, data: { confirm: 'Are you sure?' }%> </td>
           </tr>
         <% end %>
       <% else %>
@@ -40,5 +40,10 @@
     </tbody>
   </table>
 </div>
-
+<div class="digg_pagination row">
+  <div class="page_info mx-auto">
+    <%= page_entries_info @comments %>
+  </div><br>
+  <%= will_paginate @comments, :container => false %>
+</div>
 

@@ -1,0 +1,19 @@
+<div class="row">
+  <div>
+    <a href="javascript:history.back()" class="btn btn-primary">Back</a>
+  </div>
+  <div class="col-10 col-sm-8 col-md-6 col-lg-4 mx-auto">
+    <div class="text-left">
+      <h3>Edit comment</h3>
+      <%= simple_form_for @comment ,url: admins_comments_path,method: :post do |f| %>
+        User :
+        <%= f.collection_select :user_id, User.all,:id,:full_name, include_blank: false, class: 'form-control' %><br>
+        Post id : <br>
+        <%= f.collection_select :post_id, Post.all,:id,:id, include_blank: false, class: 'form-control' %>
+        <%= f.input :content %>
+        <%= f.button :submit %>
+      <% end %>
+    </div>
+  </div>
+</div>
+
