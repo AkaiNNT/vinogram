@@ -15,18 +15,15 @@
       <% end %>
     </div>
       <ul class="navbar-nav ml-auto navbar_icon">
-
-    <li class="nav-item">
-      <a class="nav-link" href="#"><i class="fa fa-sun-o" aria-hidden="true"></i></a>
+    <li class="nav-item mr-1 mr-md-3 mr-lg-4">
+      <a class="nav-link" href="<%= suggested_users_path %>"><i class="fa fa-compass fa-lg" aria-hidden="true"></i></a>
     </li>
-
     <!-- dropdown notificaiton-->
-    <li class="nav-item demo dropdown">
+    <li class="nav-item dropdown mr-1 mr-md-3 mr-lg-4 ">
       <a class="nav-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        <i class="fa fa-heart-o" aria-hidden="true"></i>
+        <i class="fa fa-heart-o fa-lg" aria-hidden="true"></i>
       </a>
       <ul class="dropdown-menu notification">
-
         <li>
           <div class="row">
             <div class="col-md-2">
@@ -40,9 +37,7 @@
             </div>
           </div>
         </li>
-
         <hr>
-
         <li>
           <div class="row">
             <div class="col-md-2">
@@ -57,13 +52,9 @@
           </div>
         </li>
       </ul>
-
     </li>
-
-    <!-- -->
-    <li class="nav-item">
-      <a class="nav-link" href="<%= suggested_users_path %>"><i class="fa fa-user-o" aria-hidden="true">
-
+    <li class="nav-item mr-1 mr-md-3 mr-lg-4">
+      <a class="nav-link" href="<%= user_path(current_user) %>"><i class="fa fa-user-o fa-lg" aria-hidden="true">
       </i></a>
     </li>
   </ul>
