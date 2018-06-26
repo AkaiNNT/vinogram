@@ -1,6 +1,6 @@
 @import './base/variable';
 .modal{
-
+  
   font-size: inherit;
 
   .footer{
@@ -106,4 +106,37 @@
       height: 600px;
     }
   }
+
+  a{
+    color: #262626;
+    text-decoration:none;
+  }
+
+  .icon-option-post{
+    cursor: pointer;
+  }
+
+  .option-modal {
+    
+    padding-top:150px;
+
+    a{
+      border-radius: 0px;
+      color: black;
+    }
+
+    a:hover{
+      color: red;
+    }
+
+    button{
+      border-radius: 0px;
+      color: black;
+    }
+
+    button:hover{
+      color: red;
+    }
+  }
+
 }

@@ -26,7 +26,7 @@
             <!-- show all comments of this post -->
                <div class="all_comments_<%=post.id%>">
                 <% post.comments.order(created_at: :asc).each do |comment| %>
-                  <%= render 'posts/comments/comment' , comment: comment%>
+                  <%= render 'posts/comments/comment' , comment: comment , only_delete: true %>
                 <% end %>
                </div> 
             <!-- end -->
@@ -74,7 +74,7 @@
                     </form>
                   </div>
                 <% end %>
-                <i class="fa fa-ellipsis-h"></i>
+                <i class="fa fa-ellipsis-h icon-option-post" data-toggle="modal" data-target="#option-post"></i>
               </div>
             </div>
             <!-- end 'add comment for this post'-->
@@ -82,5 +82,25 @@
         </div>
       </div>
     </div>
+  </div>
+</div>
+
+<div class="modal fade" id="option-post" role="dialog">
+  <div class="modal-dialog option-modal modal-sm">
+  
+    <!-- Modal content-->
+    <div class="modal-content">
+      <%= link_to "Go to wall's '#{post.user.full_name}'", user_path(post.user), class: "btn btn-info" %>
+      <% if post.comments.pluck(:user_id).include? current_user.id %>
+        <%#= link_to "Options Comment", "#", class: "btn btn-info btn-Options" %>
+        <button class= "btn btn-info btn-Options" >Delete Comment</button>
+      <% end %>
+      <% if post.user == current_user %>
+        <%= link_to "Edit Post", edit_post_path(post), class: "btn btn-info" %>
+        <%= link_to "Delete Post", post_path(post), method: :delete, class: "btn btn-info" %>
+      <% end %>
+      <%= link_to "Cancel", "#", class: "btn btn-info", data: {dismiss: "modal"} %>
+    </div>
+    
   </div>
 </div>
