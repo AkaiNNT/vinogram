@@ -1,7 +1,7 @@
 <div class="nested-fields col-10 col-sm-6 col-lg-4">
-	<div class="logo_uploader">
+	<div class="logo_uploader w-100">
     <% if f.object.image.present? %>
-      <img src="<%= f.object.image.url %>" alt="img" class='image-upload'>
+      <img src="<%= f.object.image.url(:medium) %>" alt="img" class='image-upload'>
     <% else %>
       <%= image_tag "upload.png", class: 'logo'%>
     <% end %>

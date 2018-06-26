@@ -6,7 +6,7 @@
     <div class="text-left">
       <h3>Create new post</h3>
       <%= simple_form_for @post, url: admins_posts_path, method: :post do |f| %>
-        <%= f.collection_select :user_id, User.all,:id,:full_name, include_blank: false, class: 'form-control' %>
+        <%= f.collection_select :user_id, User.all.order(full_name: :asc),:id,:full_name, include_blank: false, class: 'form-control' %>
         <%= f.input :content, autofocus: true, label: false, placeholder: 'Content' %>
         Post with user name :
         <br>

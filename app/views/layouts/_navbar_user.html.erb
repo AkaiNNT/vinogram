@@ -6,7 +6,7 @@
       <% end %>
     </div>
     <div class="m-auto">
-      <% if controller_name == 'users' || controller_name == 'registrations' %>
+      <% if controller_name == 'users'%>
       <%= simple_form_for @search , url: search_users_path, method: :get do |f| %>
       <%= f.input :search, label: false, placeholder: 'Search' %>
       <% end %>
