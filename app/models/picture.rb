@@ -1,6 +1,6 @@
 class Picture < ApplicationRecord
   belongs_to :imageable , polymorphic: true
-  has_attached_file :image , styles: { medium: "300x300#", thumb: "100x100>" }, default_url: "/images/:style/missing.png", 
+  has_attached_file :image , styles: { origin: "1280×720>", medium: "300x300#", thumb: "100x100>" }, default_url: "/images/:style/missing.png",
                                         size: { in: 0..1000.kilobytes },
                                         url: "/system/:hash.:extension",
                                         hash_secret: "abc123"

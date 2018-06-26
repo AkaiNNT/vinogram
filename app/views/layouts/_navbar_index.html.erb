@@ -1,7 +1,9 @@
 <div class="nav-layout container-fluid">
   <div class="d-flex align-items-center">
-    <div class="mr-auto">
-      <%= image_tag 'logo.png', class: 'logo-navbar'%><span class="font-weight-bold brand-name d-none d-sm-inline">VINOGRAM</span>
+    <div class="mr-auto root-icon">
+      <%= link_to root_path do %>
+        <%= image_tag 'logo.png', class: 'logo-navbar'%><span class="font-weight-bold brand-name d-none d-sm-inline">VINOGRAM</span>
+      <% end %>
     </div>
     <div class="m-auto">
       <% if controller_name == 'users' %>
