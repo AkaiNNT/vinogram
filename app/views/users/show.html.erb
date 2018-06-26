@@ -15,7 +15,14 @@
         <% if @user == current_user %> 
           <div class="edit_profile_link">
             <%= link_to 'Edit Profile', edit_user_path(current_user), class: 'button'%>
-            
+          </div>
+          <div class="dropdown">
+            <i class="fa fa-cog fa-lg icon-cog " data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
+            <div class="dropdown-menu" >
+              <a class="dropdown-item" href="<%=edit_user_path(current_user)%>">Edit Profile</a>
+              <a class="dropdown-item" href="<%=edit_user_registration_path(current_user)%>">Change Password</a>
+              <a class="dropdown-item" href="<%= destroy_user_session_path %>" data-method= "delete">Log Out</a>
+            </div>
           </div>
         <% end %>
      </div>
