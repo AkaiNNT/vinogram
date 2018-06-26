@@ -12,60 +12,99 @@
       </div>
       <ul class="navbar-nav ml-auto navbar_icon">
 
-        <li class="nav-item">
-          <a class="nav-link" href="#"><i class="fa fa-sun-o" aria-hidden="true"></i></a>
-        </li>
+        <li class="nav-item dropdown">
+         <a class="nav-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+           <i class="fa fa-sun-o" aria-hidden="true"></i>
+         </a>
+         <ul class="dropdown-menu notification">
+          <% if current_user.followers.where(status: "pending").any?%>
+            <% current_user.followers.where(status: "pending").each do |f|%>
+              <li>
+                <div class="row">
+                  <div class="col-md-2">
+                    <%= image_tag (f.follower.avatar.url), class: 'norification_img'%>
+                  </div>
+                  <div class="col-md-6" >
+                    <%= f.follower.full_name%> 
+                    <span style="display: none" id="approve_message">is following you!</span>
+                    <span style="display: none" id="denied_message">is denied!</span>
+                  </div>
+                  <div class="col-md-4 list_approve_follower_btn">
+                    <%= button_to 'Approve',approve_user_path(f.follower), class: 'btn small-btn btn-primary button', method: :put, id: 'user_approve_follower_btn'%>
+                    <%#= button_to 'Cancel',destroy_follower_user_path(f.follower), method: :delete, id: 'user_denied_follower_btn'%>
+                  </div>
+                </div>
+              </li>
+            <% end %>
+          <% else %>
+            <li>Nothing</li>
+          <% end %>
 
-        <!-- dropdown notificaiton-->
-        <li class="nav-item demo dropdown">
-          <a class="nav-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <i class="fa fa-heart-o" aria-hidden="true"></i>
-          </a>
-          <ul class="dropdown-menu notification">
+          <hr>
+        </ul>
+      </li>
 
-            <li>
-              <div class="row">
-                <div class="col-md-2">
-                  <%= image_tag 'default_images.jpeg', class: 'norification_img'%>
-                </div>
-                <div class="col-md-8" >
-                  Heo Map Map liked this post.
-                </div>
-                <div class="col-md-2" >
-                  <%= image_tag 'default_images.jpeg', class: 'norification_img'%>
-                </div>
+      <!-- dropdown notificaiton-->
+      <li class="nav-item dropdown">
+        <a class="nav-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <i class="fa fa-heart-o" aria-hidden="true"></i>
+        </a>
+        <ul class="dropdown-menu notification">
+
+          <li>
+            <div class="row">
+              <div class="col-md-2">
+                <%= image_tag 'default_images.jpeg', class: 'norification_img'%>
               </div>
-            </li>
-
-            <hr>
-
-            <li>
-              <div class="row">
-                <div class="col-md-2">
-                  <%= image_tag 'default_images.jpeg', class: 'norification_img'%>
-                </div>
-                <div class="col-md-8" >
-                  Heo Map Map liked this post.
-                </div>
-                <div class="col-md-2" >
-                  <%= image_tag 'default_images.jpeg', class: 'norification_img'%>
-                </div>
+              <div class="col-md-8" >
+                Heo Map Map liked this post.
               </div>
-            </li>
-          </ul>
+              <div class="col-md-2" >
+                <%= image_tag 'default_images.jpeg', class: 'norification_img'%>
+              </div>
+            </div>
+          </li>
 
-        </li>
-        
-        <!-- -->
-        <li class="nav-item">
-          <a class="nav-link" href="<%= suggested_users_path %>"><i class="fa fa-user-o" aria-hidden="true">
+          <hr>
 
-          </i></a>
-        </li>
-      </ul>
-    </div>
+          <li>
+            <div class="row">
+              <div class="col-md-2">
+                <%= image_tag 'default_images.jpeg', class: 'norification_img'%>
+              </div>
+              <div class="col-md-8" >
+                Heo Map Map liked this post.
+              </div>
+              <div class="col-md-2" >
+                <%= image_tag 'default_images.jpeg', class: 'norification_img'%>
+              </div>
+            </div>
+          </li>
+        </ul>
 
-  </nav>
+      </li>
+
+      <!-- -->
+      <li class="nav-item">
+        <a class="nav-link" href="<%= suggested_users_path %>"><i class="fa fa-user-o" aria-hidden="true">
+
+        </i></a>
+      </li>
+    </ul>
+  </div>
+
+</nav>
 </div>
 
+<script type="text/javascript">
+  $("#user_approve_follower_btn").click(function(){
+    $(".list_approve_follower_btn").hide();
+    $("#approve_message").show();
 
+  });
+  
+  // $("#user_denied_follower_btn").click(function(){
+  //   $(".list_approve_follower_btn").hide();
+  //   $("#denied_message").show();
+  // });
+</script>

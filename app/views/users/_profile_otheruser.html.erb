@@ -1,0 +1,42 @@
+<section class="header">
+
+  <div class="row">
+    <div class="col-md-4 ">
+      <div class="avatar_img">
+       <%= image_tag (@user.avatar.url),id: 'blah'%> 
+     </div>
+    </div>
+     <div class="col-md-8">
+      <div class="row">
+       <h4 class="name_field"><%= @user.full_name%></h4>
+       <div class="edit_profile_link">
+        <%if current_user.followings.where(following: @user).any? %>
+        <%if current_user.followings.where(following: @user).last.status == 'pending' %>
+        <%= link_to 'Pending', edit_user_path(@user), class: 'button', method: :put%>
+        <%else %>
+        <%= link_to 'Following', destroy_following_user_path(@user), class: 'button', method: :delete%>
+        <%end%>
+        <%else%>
+        <%= button_to 'Follow', follow_user_path(@user), class: 'button button-following', method: :put, id: "user_follow_" + @user.id.to_s , remote: true%>
+        <%end%>
+      </div>
+    </div>
+    <div class="row info">
+     <ul>
+       <li><strong><%=@user.posts.count%></strong> posts</li>
+       <li><strong><%= @user.followers.count %></strong> follower</li>
+       <li><strong><%= @user.followings.count %></strong> following</li>
+     </ul>
+    </div>
+     <div class="row ">
+      <span class="info_description">
+       <strong><%= @user.email%></strong>
+       <%if @user.description%> 
+       : <%= @user.description%>
+       <%end%>
+     </span>
+      </div>
+    </div>
+  </div>
+
+</section>

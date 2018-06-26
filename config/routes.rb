@@ -16,6 +16,8 @@ Rails.application.routes.draw do
     get 'search', to: 'users#search_navbar', on: :collection
     get 'suggested', to: 'users#suggested', on: :collection
     put 'follow', to: 'users#follow', on: :member
+    delete 'destroy_following', on: :member
+    put 'approve', to: 'users#approve_follower', on: :member
   end
 
   devise_for :admins, controllers: {

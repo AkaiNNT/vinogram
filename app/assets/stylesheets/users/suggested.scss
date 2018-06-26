@@ -2,49 +2,123 @@
 
 .suggested{
   padding: $primary-padding_suggested;
- .avatar_following{
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-}
-
-.info_following{
-  list-style: none;
-}
-
-.tb_following{
-  border: 1px solid #dee2e6;
-  td {
-    padding-left: 40px;
-  }
-
-  .button{
-    float: right;
-    margin-right: 40px;
-    height: 80%;
-  }
-  .full_name{
+  .user_suggested_label{
+    font-weight: bold;
     color: #999;
-    font-size:12px;
+  }
+  .avatar_following{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+  }
+
+  .info_following{
+    list-style: none;
+    padding:5px !important;
+  }
+
+  .tb_following{
+    border: 1px solid #dee2e6;
+    td {
+      padding-left: 40px;
+    }
+
+    .button{
+      float: right;
+      margin-right: 40px;
+      height: 80%;
+    }
+    .full_name{
+      color: #999;
+      font-size:12px;
+    }
+  }
+  .user_destroy_following{
+    font-style: italic;
   }
 }
-}
 
-@media (max-width: 575.98px) { 
+@media (max-width: 479.98px){
   .suggested{
     padding: 100px 0 10px 0 !important;
   }
-
+  .user_email_overflow{
+    white-space: nowrap; 
+    width: 120px; 
+    overflow: hidden;
+    text-overflow: ellipsis; 
+    font-size:11px;
+  }
+  .user_email_overflow:hover{
+    overflow: visible;
+  }
+  .full_name{
+   white-space: nowrap; 
+   width: 120px; 
+   overflow: hidden;
+   text-overflow: ellipsis; 
+   font-size:10px;
+ }
+}
+@media (min-width: 480px) and (max-width: 575.98px) { 
+  .suggested{
+    padding: 100px 0 10px 0 !important;
+  }
+  .user_email_overflow{
+    white-space: nowrap; 
+    width: 210px; 
+    overflow: hidden;
+    text-overflow: ellipsis; 
+  }
+  .user_email_overflow:hover{
+    overflow: visible;
+  }
+  .full_name{
+   white-space: nowrap; 
+   width: 210px; 
+   overflow: hidden;
+   text-overflow: ellipsis; 
+ }
 }
 @media (min-width: 576px) and (max-width: 767.98px){ 
   .suggested{
     padding: 100px 50px 10px 50px !important;
   }
+  .user_email_overflow{
+    white-space: nowrap; 
+    width: 218px; 
+    overflow: hidden;
+    text-overflow: ellipsis; 
+  }
+  .user_email_overflow:hover{
+    overflow: visible;
+  }
+  .full_name{
+   white-space: nowrap; 
+   width: 218px; 
+   overflow: hidden;
+   text-overflow: ellipsis; 
+ }
 }
 
 @media (min-width: 768px) and (max-width: 991.98px){ 
- .suggested{
-   magrin: 0 auto;
-   padding: 100px 200px 10px 200px !important;
+  .suggested{
+    magrin: 0 auto;
+    padding: 100px 100px 10px 100px !important;
+  }
+  .user_email_overflow{
+    white-space: nowrap; 
+    width: 200px; 
+    overflow: hidden;
+    text-overflow: ellipsis; 
+  }
+  .user_email_overflow:hover{
+    overflow: visible;
+  }
+  .full_name{
+   white-space: nowrap; 
+   width: 165px; 
+   overflow: hidden;
+   text-overflow: ellipsis; 
  }
 }

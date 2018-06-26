@@ -1,4 +1,5 @@
 <div class="suggested">
+  <h6 class="user_suggested_label">Suggested</h6>
  <div> 
    <!-- start table-->
    <table class="table tb_following">
@@ -7,27 +8,46 @@
       <tr>
         <td>
           <div class="row">
-          <a href="<%=user_path(user)%>"> <%= image_tag (user.avatar.url), class: "avatar_following" %></a>
-         <ul class="info_following">
-          <li><%= user.email%></li>
-          <li class="full_name"><%= user.full_name%></li>
-        </ul>
-      </div>
-      </td>
+            <a href="<%=user_path(user)%>"> <%= image_tag (user.avatar.url), class: "avatar_following" %></a>
 
-      <td>
-        <%#= simple_form_for user, url: follow_user_path(user), method: :put, html: {multipart: true} do |f|%>
-        <%#= f.button :submit, "Follow", class: 'btn small-btn btn-primary button' %>
-        <%# end %>
-        <% if current_user.followings.pluck(:following_id).include?(user.id) %>
-        <% else %>
-          <%= button_to "Follow", follow_user_path(user), class: 'btn small-btn btn-primary button', method: :put %>
-        <% end %>
-      </td>
-    </tr>
-    <%end%>
-  </tbody>
-</table>
-<!-- end table-->
+            <ul class="info_following">
+              <li class="user_email_overflow"><%= user.email%></li>
+              <li class="full_name"><%= user.full_name%></li>
+            </ul>
+          </div>
+        </td>
+        <td>
+          <%#= simple_form_for user, url: follow_user_path(user), method: :put, html: {multipart: true} do |f|%>
+          <%#= f.button :submit, "Follow", class: 'btn small-btn btn-primary button' %>
+          <%# end %>
+          <%# if current_user.followings.pluck(:following_id).include?(user.id) 
+          %>
+
+          <%if Following.where(following: user, follower: current_user, status: 'pending').any?%>
+          <%#= button_to "Pending", follow_user_path(user), class: 'btn small-btn btn-warning button', method: :put %>
+
+          <div class="dropdown">
+            <button class="btn small-btn btn-warning button" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <span>Pending</span>
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+             
+             <%= link_to "Cancel",destroy_following_user_path(user), method: :delete %>
+            </div>
+          </div>
+          <% else %>
+          <%= button_to "Follow", follow_user_path(user), class: 'btn small-btn btn-primary button button-following', method: :put, id: "user_follow_" + user.id.to_s , remote: true %>
+          <% end %>
+        </td>
+      </tr>
+      <%end%>
+    </tbody>
+  </table>
+  <!-- end table-->
 </div>
 </div>
+
+<script type="text/javascript">
+ 
+  
+</script>
