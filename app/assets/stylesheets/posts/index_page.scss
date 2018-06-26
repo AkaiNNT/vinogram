@@ -1,17 +1,18 @@
 .index_main{
-	min-height:83vh;	
+	min-height:83vh;
+	margin-top: 50px;
 }
 
 .profile-post{
-		transform: translate(-9px, -9px); 
-		position: absolute; 
-		top: 5px; 
-		left: 15px; 
-		width: 50px; 
+		transform: translate(-9px, -9px);
+		position: absolute;
+		top: 5px;
+		left: 15px;
+		width: 50px;
 		height: 50px;
 	}
 .form-create-post{
-	
+
 	background-color: #f2f2f2;
 
 	.btn-post{
@@ -60,7 +61,7 @@
 }
 
 .form-show-post{
-	
+
 	a{
 		color: #262626;
 		text-decoration:none;
@@ -72,7 +73,7 @@
 		text-overflow: ellipsis;
 		white-space: nowrap;
 		padding-left: 5px;
-		margin-left: -5px; 
+		margin-left: -5px;
 	}
 
 	header{
@@ -83,7 +84,7 @@
 	video{
 		margin-top: -15px;
 	}
-	
+
 	.img-post img{
 		height: 400px;
 		vertical-align: middle;
@@ -92,7 +93,7 @@
 
 	.icon-comment{
 		margin-left: 10px;
-		cursor: pointer; 
+		cursor: pointer;
 	}
 
 	.red-heart {
@@ -119,4 +120,8 @@
     font-size: 14px;
 	}
 
+}
+
+.edit-post{
+	margin-top: 50px;
 }
