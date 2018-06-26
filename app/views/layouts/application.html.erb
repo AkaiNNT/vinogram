@@ -26,7 +26,9 @@
     </p>
   <% end %>
 
-  <% if controller_name == "users" || "posts" %>
+  <% if controller_name == "users" %>
+    <%= render 'layouts/navbar_index'%>
+  <% elsif controller_name == "posts" %>
     <%= render 'layouts/navbar_index'%>
   <% end %>
 

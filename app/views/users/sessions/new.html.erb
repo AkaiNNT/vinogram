@@ -33,8 +33,6 @@
                 <h2 class="text-uppercase font-weight-bold title-form">Vinogram</h2>
             </div>
             <br>
-              <button type="button" class="form-control btn-facebook">Đăng nhập với Facebook</button>
-              <hr>
               <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
                 <div class="form-inputs">
                   <%= f.input :email, required: false, label: false, placeholder: 'Email người dùng' %>
