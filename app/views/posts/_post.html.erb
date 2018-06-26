@@ -49,15 +49,9 @@
 					<% end %>
 					<section class="all_comments_<%=post.id%>">
 						<% if post.comments.count > 4%>
-							<% if showallcomment == true %>
-								<% post.comments.order(created_at: :asc).each do |comment| %>
-									<%= render "posts/comments/comment", comment: comment %>
-								<% end %>
-							<% else %>	
-								<div class="view-all-comment"><%= link_to "View all comments", post_path(post) %></div>
-								<% post.comments.order(created_at: :asc).last(4).each do |comment| %>
-									<%= render "posts/comments/comment", comment: comment %>
-								<% end %>
+							<div class="view-all-comment"><%= link_to "View all comments", post_path(post) %></div>
+							<% post.comments.order(created_at: :asc).last(4).each do |comment| %>
+								<%= render "posts/comments/comment", comment: comment %>
 							<% end %>
 						<% else %>
 							<% post.comments.order(created_at: :asc).each do |comment| %>

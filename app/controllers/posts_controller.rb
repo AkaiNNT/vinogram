@@ -63,7 +63,10 @@ class PostsController < ApplicationController
       @posts = Post.all.order(created_at: :desc).paginate(:page => params[:page], :per_page => 5)
     else
       search = params[:search]
-      @posts = Post.select('*').joins(:user).where("posts.content || ' ' || users.full_name ILIKE ?", "%#{search}%").paginate(:page => params[:page], :per_page => 5)
+      @posts = Post.where("content ILIKE ?", "%#{search}%").paginate(:page => params[:page], :per_page => 5)
+      if @posts.count == 0 
+        flash[:danger] = "Not found!!!"
+      end
     end
   end
 

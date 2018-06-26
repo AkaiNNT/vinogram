@@ -6,8 +6,6 @@
 	$('.js-comment').click(function(){
 			var post_id = '#myInput_' + $(this).data('post-id');
 			console.log(post_id);
-			// text_area = $('.container').find(post_id);
-			// text_area.focus();
 			setTimeout(function() {
 				$('.container').find(post_id).focus();
 			}, 100);
@@ -23,7 +21,6 @@
 		});
 	}
   $('#postModal').on('hidden.bs.modal', function () {
-    // do something…
     <% if params[:page_user] == "true" %>
   		window.location.replace("<%= user_path(@post.user)%>");
   	<% else %>

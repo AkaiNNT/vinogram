@@ -1,7 +1,7 @@
-<div class="container">
+<div class="container index_main">
 		<%= render "create_post" %>
 		<br>
-		<%= render @posts, showallcomment: false %>
+		<%= render @posts %>
 		<%= will_paginate @posts %>
 </div>
 
