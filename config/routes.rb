@@ -8,8 +8,8 @@ Rails.application.routes.draw do
     resources :comments, controller: 'posts/comments'
     resources :likes, controller: 'posts/likes'
   end
-  get 'home/index'
-  root to: "home#index"
+  # get 'home/index'
+  root to: "posts#index"
 
 
   resources :users do
