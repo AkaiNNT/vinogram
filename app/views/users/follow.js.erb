@@ -1,0 +1,8 @@
+console.log('<%= @user_status %>');
+var id = '#user_follow_' + '<%= @user.id.to_s %>';
+console.log(id);
+// var $button = $('.tb_following').children(id)
+// $button.text('<%= @user_status %>');
+var $avad = $(id);
+console.log($avad);
+$avad.addClass('class-name').val('<%= @user_status.titleize %>');

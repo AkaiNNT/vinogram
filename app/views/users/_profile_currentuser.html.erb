@@ -1,0 +1,36 @@
+<section class="header">
+    <%= simple_form_for @user, url: user_path, method: :put, html: {multipart: true} do |f|%>
+    <div class="row">
+      <div class="col-md-4 ">
+        <div class="avatar_img">
+         <%= image_tag (@user.avatar.url),id: 'blah'%>
+         <%= f.file_field :avatar, value: 'Edit avatar', id: 'edit_avatar', onchange: "readURL(this);"%>
+       </div>
+     </div>
+
+     <div class="col-md-8">
+      <div class="row">
+       <h4 class="name_field"><%= @user.full_name%></h4>
+       <div class="edit_profile_link">
+         <%= link_to 'Edit Profile', edit_user_path(@user), class: 'button'%>
+       </div>
+     </div>
+     <div class="row info">
+       <ul>
+         <li><strong>69</strong> posts</li>
+         <li><strong>100</strong> follower</li>
+         <li><strong>62</strong> following</li>
+       </ul>
+     </div>
+     <div class="row ">
+      <span class="info_description">
+       <strong><%= @user.email%> </strong>
+       <%if @user.description%> 
+       :<%= @user.description%>
+       <%end%>
+     </span>
+     </div>
+   </div>
+ </div>
+ <%end%>
+</section>
