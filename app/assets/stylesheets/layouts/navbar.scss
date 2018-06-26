@@ -22,7 +22,7 @@
     }
   }
 
-  input {
+  input#search{
     width: 200px;
     padding-left: 80px;
     box-sizing: border-box;
@@ -32,10 +32,11 @@
     background-repeat: no-repeat;
     background-position: 62px 7px;
   }
-  input:focus {
+  input#search:focus {
     padding-left: 16px;
     background-position: 0;
   }
+
 
   a{
     color: black;
@@ -117,7 +118,7 @@
   }
 }
 
-.navbar_users{
+/*.navbar_users{
   .logo_img{
     width: 50px;
     height: 50px;
@@ -205,5 +206,5 @@
 
 }
 
-
+*/
 
