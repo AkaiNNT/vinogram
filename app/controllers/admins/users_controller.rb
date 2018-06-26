@@ -6,7 +6,6 @@ class Admins::UsersController < Admins::BaseController
       @users = User.all.order(id: :asc).paginate(:page => params[:page], :per_page => 5)
     else
       search = params[:search]
-      d
       @users = User.where("email || ' ' || full_name || ' ' || contact_number ILIKE ?", "%#{search}%").paginate(:page => params[:page], :per_page => 5)
     end
   end
