@@ -1,4 +1,5 @@
 class PostsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_post ,only: [:update, :edit, :destroy]
   before_action :set_posts , only: [:index,:create]
   before_action :search_form
@@ -63,8 +64,8 @@ class PostsController < ApplicationController
       @posts = Post.all.order(created_at: :desc).paginate(:page => params[:page], :per_page => 5)
     else
       search = params[:search]
-      @posts = Post.where("content ILIKE ?", "%#{search}%").paginate(:page => params[:page], :per_page => 5)
-      if @posts.count == 0 
+      @posts = Post.joins(:user).where("posts.content || ' ' || users.full_name || ' ' || posts.id || ' ' || posts.user_id  || ' ' || users.email || ' ' || users.contact_number ILIKE ?", "%#{search}%").paginate(page: params[:page], per_page: 5)
+      if @posts.count == 0
         flash[:danger] = "Not found!!!"
       end
     end
@@ -73,5 +74,5 @@ class PostsController < ApplicationController
   def search_form
     @search = ""
   end
-  
-end 
+
+end

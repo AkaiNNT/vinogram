@@ -6,7 +6,7 @@ class Admins::CommentsController < Admins::BaseController
       @comments = Comment.all.order(created_at: :desc).paginate(:page => params[:page], :per_page => 5)
     else
       search = params[:search]
-      @comments = Comment.where("content || ' ' || user_id || ' ' || id || ' ' || post_id ILIKE ?", "%#{search}%").paginate(:page => params[:page], :per_page => 5)
+      @comments = Comment.joins(:user).where("comments.content || ' ' || users.full_name || ' ' || comments.id || ' ' || comments.user_id  || ' ' || users.email || ' ' || users.contact_number ILIKE ?", "%#{search}%").paginate(page: params[:page], per_page: 5)
     end
   end
 

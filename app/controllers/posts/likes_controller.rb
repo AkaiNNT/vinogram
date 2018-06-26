@@ -1,4 +1,5 @@
 class Posts::LikesController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_post , only: [:create,:destroy]
   def create
     unless @post.liking_users.include? current_user

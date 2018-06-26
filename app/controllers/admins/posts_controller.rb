@@ -6,7 +6,7 @@ class Admins::PostsController < Admins::BaseController
       @posts = Post.all.order(created_at: :desc).paginate(:page => params[:page], :per_page => 5)
     else
       search = params[:search]
-      @posts = Post.where("content || ' ' || user_id || ' ' || id ILIKE ?", "%#{search}%").paginate(:page => params[:page], :per_page => 5)
+      @posts = Post.joins(:user).where("posts.content || ' ' || users.full_name || ' ' || posts.id || ' ' || posts.user_id  || ' ' || users.email || ' ' || users.contact_number ILIKE ?", "%#{search}%").paginate(page: params[:page], per_page: 5)
     end
   end
 

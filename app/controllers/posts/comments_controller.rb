@@ -1,4 +1,5 @@
 class Posts::CommentsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_post ,only: [:create, :update, :destroy]
   before_action :set_cmt ,only: [:destroy, :update]
 
@@ -27,11 +28,11 @@ class Posts::CommentsController < ApplicationController
   end
 
   private
-  
+
   def comment_params
     params.require(:comment).permit(:content)
   end
-  
+
   def set_post
     @post = Post.find(params[:post_id])
   end
