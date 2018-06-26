@@ -26,5 +26,11 @@
   	<% else %>
   		window.location.replace("<%= posts_path%>");
   	<% end %>
-	});	
+	});
+
+	$('.options-comment').addClass('d-none');
+	$('.btn-Options').click(function(){
+		$('#option-post').modal('hide');
+		$('.options-comment').removeClass('d-none');
+	});
 </script>

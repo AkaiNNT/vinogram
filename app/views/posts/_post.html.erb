@@ -51,11 +51,11 @@
 						<% if post.comments.count > 4%>
 							<div class="view-all-comment"><%= link_to "View all comments", post_path(post) %></div>
 							<% post.comments.order(created_at: :asc).last(4).each do |comment| %>
-								<%= render "posts/comments/comment", comment: comment %>
+								<%= render "posts/comments/comment", comment: comment,only_delete: false %>
 							<% end %>
 						<% else %>
 							<% post.comments.order(created_at: :asc).each do |comment| %>
-								<%= render "posts/comments/comment", comment: comment %>
+								<%= render "posts/comments/comment", comment: comment,only_delete: false %>
 							<% end %>	
 						<% end %>	
 					</section>
