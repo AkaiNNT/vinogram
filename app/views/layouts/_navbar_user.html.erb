@@ -1,110 +1,61 @@
-<div class="navbar_users">
-  <nav class="navbar fixed-top navbar-expand-lg bg-light">
-    <div class="container">
-      <div class="mr-auto">
-        <%= image_tag 'logo.png', class: 'logo_img'%>
-        <h2 class="navbar-brand brand">Vinogram</h2>
-      </div>     
-      <div class="m-auto">
-        <form class="form-inline my-2 my-md-0">
-          <input class=" input_control navbar_input" type="text" placeholder="Search" aria-label="Search" >
-        </form>
-      </div>
-      <ul class="navbar-nav ml-auto navbar_icon">
-
-        <li class="nav-item dropdown">
-         <a class="nav-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-           <i class="fa fa-sun-o" aria-hidden="true"></i>
-         </a>
-         <ul class="dropdown-menu notification">
-          <% if current_user.followers.where(status: "pending").any?%>
-            <% current_user.followers.where(status: "pending").each do |f|%>
-              <li>
-                <div class="row">
-                  <div class="col-md-2">
-                    <%= image_tag (f.follower.avatar.url), class: 'norification_img'%>
-                  </div>
-                  <div class="col-md-6" >
-                    <%= f.follower.full_name%> 
-                    <span style="display: none" id="approve_message">is following you!</span>
-                    <span style="display: none" id="denied_message">is denied!</span>
-                  </div>
-                  <div class="col-md-4 list_approve_follower_btn">
-                    <%= button_to 'Approve',approve_user_path(f.follower), class: 'btn small-btn btn-primary button', method: :put, id: 'user_approve_follower_btn'%>
-                    <%#= button_to 'Cancel',destroy_follower_user_path(f.follower), method: :delete, id: 'user_denied_follower_btn'%>
-                  </div>
-                </div>
-              </li>
-            <% end %>
-          <% else %>
-            <li>Nothing</li>
-          <% end %>
-
-          <hr>
-        </ul>
+<div class="nav-layout container-fluid">
+  <div class="d-flex align-items-center">
+    <div class="mr-auto root-icon">
+      <%= link_to root_path do %>
+      <%= image_tag 'logo.png', class: 'logo-navbar'%><span class="font-weight-bold brand-name d-none d-sm-inline">VINOGRAM</span>
+      <% end %>
+    </div>
+    <div class="m-auto">
+      <% if controller_name == 'users' || controller_name == 'registrations' %>
+      <%= simple_form_for @search , url: search_users_path, method: :get do |f| %>
+      <%= f.input :search, label: false, placeholder: 'Search' %>
+      <% end %>
+      <% elsif controller_name == 'posts' %>
+      <%= simple_form_for @search , url: posts_path, method: :get do |f| %>
+      <%= f.input :search, label: false, placeholder: 'Search' %>
+      <% end %>
+      <% end %>
+    </div>
+    <ul class="navbar-nav ml-auto navbar_icon">
+      <li class="nav-item mr-0 mr-md-3 mr-lg-4">
+        <a class="nav-link" href="<%= suggested_users_path %>"><i class="fa fa-compass fa-lg" aria-hidden="true"></i></a>
       </li>
-
       <!-- dropdown notificaiton-->
-      <li class="nav-item dropdown">
+      <li class="nav-item dropdown mr-0 mr-md-3 mr-lg-4 ">
         <a class="nav-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          <i class="fa fa-heart-o" aria-hidden="true"></i>
+          <i class="fa fa-heart-o fa-lg" aria-hidden="true"></i>
         </a>
         <ul class="dropdown-menu notification">
-
-          <li>
-            <div class="row">
-              <div class="col-md-2">
-                <%= image_tag 'default_images.jpeg', class: 'norification_img'%>
+         <% if current_user.followers.where(status: "pending").any?%>
+           <% current_user.followers.where(status: "pending").each do |f|%>
+             <li>
+              <div class="row">
+                <div class="col-md-2">
+                  <%= image_tag (f.follower.avatar.url), class: 'norification_img'%>
+                </div>
+                <div class="col-md-6" >
+                  <%= f.follower.full_name%> 
+                  <span style="display: none" id="approve_message">is following you!</span>
+                  <span style="display: none" id="denied_message">is denied!</span>
+                </div>
+                <div class="col-md-4 list_approve_follower_btn">
+                  <%= button_to 'Approve',approve_user_path(f.follower), class: 'btn small-btn btn-primary button', method: :put, id: 'user_approve_follower_btn'%>
+                </div>
               </div>
-              <div class="col-md-8" >
-                Heo Map Map liked this post.
-              </div>
-              <div class="col-md-2" >
-                <%= image_tag 'default_images.jpeg', class: 'norification_img'%>
-              </div>
-            </div>
-          </li>
+            </li>
+          <% end %>
+        <% else %>
+        <li> You don't have new notifications</li>
+        <% end %>
 
-          <hr>
-
-          <li>
-            <div class="row">
-              <div class="col-md-2">
-                <%= image_tag 'default_images.jpeg', class: 'norification_img'%>
-              </div>
-              <div class="col-md-8" >
-                Heo Map Map liked this post.
-              </div>
-              <div class="col-md-2" >
-                <%= image_tag 'default_images.jpeg', class: 'norification_img'%>
-              </div>
-            </div>
-          </li>
-        </ul>
-
-      </li>
-
-      <!-- -->
-      <li class="nav-item">
-        <a class="nav-link" href="<%= suggested_users_path %>"><i class="fa fa-user-o" aria-hidden="true">
-
-        </i></a>
-      </li>
-    </ul>
-  </div>
-
-</nav>
+        <hr>
+        
+      </ul>
+    </li>
+    <li class="nav-item mr-0 mr-md-3 mr-lg-4">
+      <a class="nav-link" href="<%= user_path(current_user) %>"><i class="fa fa-user-o fa-lg" aria-hidden="true">
+      </i></a>
+    </li>
+  </ul>
 </div>
-
-<script type="text/javascript">
-  $("#user_approve_follower_btn").click(function(){
-    $(".list_approve_follower_btn").hide();
-    $("#approve_message").show();
-
-  });
-  
-  // $("#user_denied_follower_btn").click(function(){
-  //   $(".list_approve_follower_btn").hide();
-  //   $("#denied_message").show();
-  // });
-</script>
+</div>
