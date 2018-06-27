@@ -37,11 +37,7 @@ class UsersController < ApplicationController
     end
     respond_to do |format|
       format.js
-<<<<<<< HEAD
     end
-=======
-      end
->>>>>>> 35148dcf5d6e51f37f37d33e3f6a16aa239efa36
   end
     # if  fl.save
     #   # redirect_to  suggested_users_path, notice: "Follow successfully!"
@@ -71,15 +67,20 @@ class UsersController < ApplicationController
       @users = []
       search = params[:search]
       list = User.where("email || ' ' || full_name || ' ' || contact_number ILIKE ?", "%#{search}%").paginate(:page => params[:page], :per_page => 5)
-      fl = current_user.followings
+      a = list.to_a
       list.each do |u|
-        fl.each do |f|
-          if f.id == u.id
-            list.pop(u)
+        f = u.followers
+        f.each do |t|
+          current_user.followings.each do |c|
+            if c.follower_id == t.follower_id && c.following_id == t.following_id
+              if c.status == 'following'
+                a.delete(u)
+              end
+            end
           end
         end
       end
-      @users = list
+      @users = a
     end
   end
 
