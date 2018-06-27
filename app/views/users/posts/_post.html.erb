@@ -1,4 +1,4 @@
-<div class="col-md-4">
+<div class="col-10 offset-1 col-md-6 offset-md-0 col-lg-4">
     <% if post.attachment.present? %>
     	<%= link_to image_tag(post.attachment.url(:thumb), class: 'post_img'), post_path(post,page_user: true) %>
       <%= link_to '<i class="fa fa-video-camera fa-2x video-camera-color"></i>'.html_safe, post_path(post,page_user: true) %>

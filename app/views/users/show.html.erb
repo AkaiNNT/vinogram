@@ -1,22 +1,24 @@
-<div class="show_profile">
-
-<%if @user == current_user%>
-  <%= render 'profile_currentuser'%>
-  <%else%>
-  <%= render 'profile_otheruser'%>
-  <%end%>
-<section class="user_post">
-  <hr>
-  <div class="title">
-    <h7>SHOW ALL POSTS</h7>
+<div class="container-fluid">  
+  <div class="show_profile">
+    <%if @user == current_user%>
+      <%= render 'profile_currentuser'%>
+      <%else%>
+      <%= render 'profile_otheruser'%>
+      <%end%>
+    <div class="user_post row">
+      <hr>
+      <div class="title col-10 offset-1">
+        <h7>SHOW ALL POSTS</h7>
+      </div>
+      <div class="posts col-10 offset-1">
+        <div class="row">
+          <% @user.posts.order(created_at: :desc).each do |post|%>
+            <%= render 'users/posts/post' ,post: post %>
+          <% end %>
+        </div>
+      </div>
+    </div>
   </div>
-  <div class="posts row">
-    <% @user.posts.order(created_at: :desc).each do |post|%>
-      <%= render 'users/posts/post' ,post: post %>
-    <% end %>
-  </div>
-</section>
-
 </div>
 <script type="text/javascript">
   $( "#blah" ).click(function() {

@@ -61,14 +61,20 @@ class PostsController < ApplicationController
 
   def set_posts
     if params[:search].to_s == ""
-      @posts = Post.all.order(created_at: :desc).paginate(:page => params[:page], :per_page => 5)
+      posts = Post.all.paginate(:page => params[:page], :per_page => 5)
     else
       search = params[:search]
-      @posts = Post.joins(:user).where("posts.content || ' ' || users.full_name || ' ' || posts.id || ' ' || posts.user_id  || ' ' || users.email || ' ' || users.contact_number ILIKE ?", "%#{search}%").paginate(page: params[:page], per_page: 5)
-      if @posts.count == 0
+      posts = Post.joins(:user).where("posts.content || ' ' || users.full_name || ' ' || posts.id || ' ' || posts.user_id  || ' ' || users.email || ' ' || users.contact_number ILIKE ?", "%#{search}%")
+      if posts.count == 0
         flash[:danger] = "Not found!!!"
       end
     end
+
+    arr_posts = []
+    current_user.followings.each do |user|
+      arr_posts += User.find(user.following_id).post_ids
+    end
+    @posts = Post.all.where(id: arr_posts).order(created_at: :desc).paginate(page: params[:page], per_page: 5)
   end
 
   def search_form
