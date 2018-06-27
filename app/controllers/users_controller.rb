@@ -16,7 +16,7 @@ class UsersController < ApplicationController
     users_all = User.all.pluck(:id)
     all_following = current_user.followings.pluck(:following_id)
     #get following_id which has status 0_pending
-    following_has_status_zero = Following.where(follower: current_user, status: 0).pluck(:following_id)
+    following_has_status_zero = Following.where(follower: current_user, status: 'pending').pluck(:following_id)
     #get following_id except which has status 0
     following = all_following - following_has_status_zero
     
@@ -25,16 +25,15 @@ class UsersController < ApplicationController
     @users = User.where(id: @users_ids)
   end
 
-  def follow
-     
+  def follow  
     if current_user.followings.where(following: @user).any?
       current_user.followings.where(following: @user).destroy_all
-      @user_status = 'Follow'
+      @user_status = 'follow'
     else
-    fl = current_user.followings.new(following: @user)
-    fl.status = @user.privacy? ? 0 : 1
-    @user_status = fl.status
-    fl.save
+      fl = current_user.followings.new(following: @user)
+      fl.status = @user.privacy? ? 'pending' : 'following'
+      @user_status = fl.status
+      fl.save
     end
     respond_to do |format|
       format.js
@@ -55,22 +54,14 @@ class UsersController < ApplicationController
      # following = Following.where(following_id: user.id, follower_id: current_user.id)
     # all_following = current_user.followings 
     # all_following.delete(following)
+    end
   end
-end
 
-# def destroy_follower
-#   user = User.find(params[:id])
-#   if current_user.followers.where(follower: user).destroy_all
-#   else
-#     redirect_to  suggested_users_path, notice: "Cancel fail!"
-#   end
-# end
   def approve_follower
     follower = User.find(params[:id])
     f = current_user.followers.where(follower: follower).last
     f.status = 'following'
     if f.save
-      # redirect_to  suggested_users_path, notice: "Approve successfully!"
     else
       redirect_to  suggested_users_path, notice: f.errors.full_messages.join(', ')
     end

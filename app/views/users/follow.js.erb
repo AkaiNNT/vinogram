@@ -1,8 +1,12 @@
 console.log('<%= @user_status %>');
 var id = '#user_follow_' + '<%= @user.id.to_s %>';
 console.log(id);
-// var $button = $('.tb_following').children(id)
-// $button.text('<%= @user_status %>');
 var $avad = $(id);
 console.log($avad);
-$avad.addClass('class-name').val('<%= @user_status.titleize %>');
+<%if @user_status == "follow"%>
+$avad.removeClass('btn-warning').removeClass('btn-secondary').addClass('btn-primary').val('<%= @user_status.titleize %>');
+<%elsif @user_status == "pending"%>
+$avad.addClass('btn-warning').val('<%= @user_status.titleize %>');
+<%elsif @user_status == "following"%>
+$avad.addClass('btn-secondary').val('<%= @user_status.titleize %>');
+<% end %>
