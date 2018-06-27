@@ -25,7 +25,15 @@ class Post < ApplicationRecord
   }, processors: [:transcoder]
   validates_attachment_content_type :attachment, content_type: /\Avideo\/.*\Z/
   validates_attachment :attachment, size: {less_than: 130.megabytes}
-
+  extend FriendlyId
+  friendly_id :slug_candidates, use: [:slugged, :finders]
+  def slug_candidates
+    [
+      :content,
+      [:content, :id],
+      [:content, :id, :created_at]
+    ]
+  end
 
   def has_content?
 

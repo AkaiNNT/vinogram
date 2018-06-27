@@ -17,5 +17,12 @@ class User < ApplicationRecord
   validates :full_name, :presence => true
   validates :full_name, :length => { :minimum => 3 },if: -> { self.full_name.present? }
   enum status: {privacy: 0, pub: 1}
-
+  extend FriendlyId
+  friendly_id :slug_candidates, use: [:slugged, :finders]
+  def slug_candidates
+    [
+      :full_name,
+      [:full_name, :email]
+    ]
+  end
 end

@@ -19,13 +19,14 @@ class UsersController < ApplicationController
     following_has_status_zero = Following.where(follower: current_user, status: 'pending').pluck(:following_id)
     #get following_id except which has status 0
     following = all_following - following_has_status_zero
-    
-    @users_ids =  users_all - following 
+
+    @users_ids =  users_all - following
     @users_ids.delete(current_user.id)
     @users = User.where(id: @users_ids)
   end
 
-  def follow  
+  def follow
+
     if current_user.followings.where(following: @user).any?
       current_user.followings.where(following: @user).destroy_all
       @user_status = 'follow'
@@ -52,7 +53,7 @@ class UsersController < ApplicationController
     else
      # redirect_to  suggested_users_path, notice: "Cancel fail!"
      # following = Following.where(following_id: user.id, follower_id: current_user.id)
-    # all_following = current_user.followings 
+    # all_following = current_user.followings
     # all_following.delete(following)
     end
   end
