@@ -21,8 +21,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   def update
-    super
-  end
+      super
+    end
   # PUT /resource
 
   # DELETE /resource
@@ -47,6 +47,11 @@ class Users::RegistrationsController < Devise::RegistrationsController
     else
       super
     end
+  end
+
+  private
+  def edit_with_pass
+    params.required(:user).permit( :password, :password_confirmation)
   end
 
   # If you have extra params to permit, append them to the sanitizer.

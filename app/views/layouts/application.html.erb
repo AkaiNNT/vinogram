@@ -25,13 +25,9 @@
       <button class="close" data-dismiss="alert">x</button>
     </p>
   <% end %>
-  <% if controller_name == "users" || controller_name == "registrations"%>
+  <%if controller_name == 'posts' || controller_name == 'users' || controller_name == 'registrations'%>
     <%= render 'layouts/navbar_user'%>
-  <% elsif controller_name == "posts" %>
-    <%= render 'layouts/navbar_index'%>
-  <% end %>
-
-
+    <% end %>
   <%= yield %>
 
   <% if controller_name != 'sessions'%>
