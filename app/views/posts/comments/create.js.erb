@@ -1,2 +1,7 @@
 $('#myInput_<%=@post.id%>').val("");
-$(".all_comments_<%=@post.id%>").append("<%= j render 'posts/comments/comment', comment: @comment, only_delete: false %>");
+if (<%=params[:comment][:comment_modal]%> == true) {
+
+	$(".all_comments_<%=@post.id%>").append("<%= j render 'posts/comments/comment', comment: @comment, only_delete: true %>");
+	$('.options-comment').addClass('d-none');
+}
+else $(".all_comments_<%=@post.id%>").append("<%= j render 'posts/comments/comment', comment: @comment, only_delete: false %>");

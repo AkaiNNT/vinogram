@@ -68,6 +68,7 @@
                   <div class="comment-form">
                     <form class="form-inline">
                       <div class="form-group">
+                        <%= form.input :comment_modal , label: false, input_html: {class: 'd-none', value: true}%>
                         <%= form.input :content ,placeholder: 'Add a comment...',label: false, input_html: { class: 'content-comment', id: "myInput_#{post.id}" ,type:  "text"}, row: 5 %>
                         <%= form.submit "submit", class: "d-none" ,id: "submit_comment_#{post.id}"%>
                       </div>
@@ -90,6 +91,7 @@
   
     <!-- Modal content-->
     <div class="modal-content">
+      <%= link_to "Go to post", post_path(post,index_page: true), class: "btn btn-info" %>
       <%= link_to "Go to wall's '#{post.user.full_name}'", user_path(post.user), class: "btn btn-info" %>
       <% if post.comments.pluck(:user_id).include? current_user.id %>
         <%#= link_to "Options Comment", "#", class: "btn btn-info btn-Options" %>

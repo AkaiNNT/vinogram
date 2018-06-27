@@ -52,24 +52,25 @@
 						</section>
 					<% end %>
 					<section class="all_comments_<%=post.id%>">
-						<% if post.comments.count > 4%>
-							<div class="view-all-comment"><%= link_to "View all comments", post_path(post) %></div>
-							<% post.comments.order(created_at: :asc).last(4).each do |comment| %>
-								<%= render "posts/comments/comment", comment: comment,only_delete: false %>
-							<% end %>
+						<% if post.comments.count > 4 && showallcmt == false %>
+								<div class="view-all-comment"><%= link_to "View all comments", post_path(post, index_page: true) %></div>
+								<% post.comments.order(created_at: :asc).last(4).each do |comment| %>
+									<%= render "posts/comments/comment", comment: comment , only_delete: false%>
+								<% end %>
 						<% else %>
 							<% post.comments.order(created_at: :asc).each do |comment| %>
-								<%= render "posts/comments/comment", comment: comment,only_delete: false %>
+								<%= render "posts/comments/comment", comment: comment , only_delete: false%>
 							<% end %>	
 						<% end %>	
 					</section>
-					<p class="text-time-post"><%= link_to "#{time_ago_in_words(post.created_at)} ago", post_path(post) %></p>
+					<p class="text-time-post"><%= link_to "#{time_ago_in_words(post.created_at)} ago", post_path(post, index_page: true) %></p>
 					<hr>
 					<section class="create_comment">
 						<%= simple_form_for post.comments.build ,url: post_comments_path(post), html: {id: "myForm_#{post.id}"} , method: :post, remote: true do |form| %>
 							<div class="comment-form ">
 								<form class="form-inline">
 									<div class="form-group m-0">
+                    <%= form.input :comment_modal , label: false, input_html: {class: 'd-none', value: false}%>
 										<%= form.input :content ,placeholder: 'Add a comment...',label: false, input_html: { class: 'content-comment p-0', id: "myInput_#{post.id}" }, row: 5 %>
 										<%= form.submit "submit", class: "d-none" ,id: "submit_comment_#{post.id}"%>
 									</div>

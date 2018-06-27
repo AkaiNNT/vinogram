@@ -1,7 +1,7 @@
 <div class="container-fluid index_main">
 	<%= render "create_post" %>
 	<br>
-	<%= render @posts %>
+	<%= render @posts , showallcmt: false %>
 	<div class="row">
 		<div class="mx-auto">
 			<%= will_paginate @posts %>
@@ -52,10 +52,8 @@
 		$('.js-comment').click(function(){
 			var post_id = '#myInput_' + $(this).data('post-id');
 			console.log(post_id);
-			// text_area = $('.container').find(post_id);
-			// text_area.focus();
 			setTimeout(function() {
-				$('.container').find(post_id).focus();
+				$('.index_main').find(post_id).focus();
 			}, 100);
 			// $(this).closest('.card').find('.content-comment').focus();
 		});

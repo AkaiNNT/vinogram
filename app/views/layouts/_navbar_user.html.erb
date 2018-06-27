@@ -53,8 +53,13 @@
       </ul>
     </li>
     <li class="nav-item mr-0 mr-md-3 mr-lg-4">
-      <a class="nav-link" href="<%= user_path(current_user) %>"><i class="fa fa-user-o fa-lg" aria-hidden="true">
-      </i></a>
+      <div class="dropdown">
+        <a class="nav-link" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user-o fa-lg" aria-hidden="true"></i></a>
+        <div class="dropdown-menu" >
+          <a class="dropdown-item" href="<%= user_path(current_user) %>"><i class="fa fa-user"></i>  Wall's <b><%=current_user.full_name%></b></a>
+          <a class="dropdown-item" href="<%= destroy_user_session_path %>" data-method= "delete"><i class="fa fa-sign-out"></i> Log Out</a>
+        </div>
+      </div>
     </li>
   </ul>
 </div>

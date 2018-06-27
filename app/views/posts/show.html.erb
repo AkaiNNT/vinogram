@@ -1,13 +1,16 @@
-<div class="container">
-	<%= render 'users/posts/modal_post' , post: @post %>
+<div class="container-fluid index_main">
+	<% if params[:index_page] == "true" %>
+		<%= render 'post', post: @post, showallcmt: true %>
+	<% else %>
+		<%= render 'users/posts/modal_post' , post: @post %>
+	<% end %>
 </div>
 <script type="text/javascript">
-	$('#postModal').modal('show');
 	$('.js-comment').click(function(){
 			var post_id = '#myInput_' + $(this).data('post-id');
 			console.log(post_id);
 			setTimeout(function() {
-				$('.container').find(post_id).focus();
+				$('.index_main').find(post_id).focus();
 			}, 100);
 			// $(this).closest('.card').find('.content-comment').focus();
 		});
@@ -20,17 +23,15 @@
 		    }
 		});
 	}
-  $('#postModal').on('hidden.bs.modal', function () {
-    <% if params[:page_user] == "true" %>
-  		window.location.replace("<%= user_path(@post.user)%>");
-  	<% else %>
-  		window.location.replace("<%= posts_path%>");
-  	<% end %>
-	});
-
-	$('.options-comment').addClass('d-none');
-	$('.btn-Options').click(function(){
-		$('#option-post').modal('hide');
-		$('.options-comment').removeClass('d-none');
-	});
+   if (<%=params[:page_user]%> == true){
+		$('#postModal').modal('show');
+	  $('#postModal').on('hidden.bs.modal', function () {
+	  	window.location.replace("<%= user_path(@post.user)%>");
+		});
+		$('.options-comment').addClass('d-none');
+		$('.btn-Options').click(function(){
+			$('#option-post').modal('hide');
+			$('.options-comment').removeClass('d-none');
+		});
+	}
 </script>

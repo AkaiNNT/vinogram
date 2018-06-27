@@ -65,11 +65,11 @@ end
 #     redirect_to  suggested_users_path, notice: "Cancel fail!"
 #   end
 # end
-def approve_follower
-  follower = User.find(params[:id])
-  f = current_user.followers.where(follower: follower).last
-  f.status = 'following'
-  if f.save
+  def approve_follower
+    follower = User.find(params[:id])
+    f = current_user.followers.where(follower: follower).last
+    f.status = 'following'
+    if f.save
       # redirect_to  suggested_users_path, notice: "Approve successfully!"
     else
       redirect_to  suggested_users_path, notice: f.errors.full_messages.join(', ')

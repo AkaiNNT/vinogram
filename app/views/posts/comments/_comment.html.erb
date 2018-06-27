@@ -1,17 +1,19 @@
 <div id="comment_<%=comment.id%>">
 	<b><%= comment.user.full_name %></b> <span id="edit_cmt_<%= comment.id%>"><%= comment.content.gsub(/\n/, ' ') %></span>
-  <% if current_user.id == comment.user.id %>	
+  <% if current_user.id == comment.user.id || comment.post.user == current_user%>	
     <div class="dropdown float-right options-comment">
       <a data-toggle="dropdown" href="">
         <i class="fa fa-ellipsis-h"></i>
       </a>
   	  <div class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-  			  <% if only_delete == false %> 
-           <%= link_to "Edit", edit_post_comment_path(comment,comment), class: "dropdown-item", "data-toggle": "modal" ,"data-target": "#editmycmt_#{ comment.id }" %>
+    			<% unless comment.post.user == current_user && comment.user != current_user %>  
+            <% if only_delete == false %> 
+              <%= link_to "Edit", edit_post_comment_path(comment,comment), class: "dropdown-item", "data-toggle": "modal" ,"data-target": "#editmycmt_#{ comment.id }" %>
+            <% end %>
           <% end %>
   	    	<%= link_to "Delete", post_comment_path(comment,post_id: comment.post_id), class: "dropdown-item",
   	    							method: :delete, data: {confirm: "Are you sure?"}, remote: true%>
-  	  </div>
+      </div>
   	</div>
   <% end %>
 	<br>
