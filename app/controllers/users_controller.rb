@@ -72,8 +72,14 @@ class UsersController < ApplicationController
     if params[:search].to_s == ""
       @users = User.all.order(created_at: :desc).paginate(:page => params[:page], :per_page => 5)
     else
+      @users = []
       search = params[:search]
-      @users = User.where("email || ' ' || full_name || ' ' || contact_number ILIKE ?", "%#{search}%").paginate(:page => params[:page], :per_page => 5)
+      list = User.where("email || ' ' || full_name || ' ' || contact_number ILIKE ?", "%#{search}%").paginate(:page => params[:page], :per_page => 5)
+      list.each do |u|
+        if u.status == "pub"
+          @users.push(u)
+        end
+      end
     end
   end
 
