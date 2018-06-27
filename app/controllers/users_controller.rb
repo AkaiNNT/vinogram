@@ -73,7 +73,9 @@ class UsersController < ApplicationController
         f.each do |t|
           current_user.followings.each do |c|
             if c.follower_id == t.follower_id && c.following_id == t.following_id
-              a.delete(u)
+              if c.status == 'following'
+                a.delete(u)
+              end
             end
           end
         end
