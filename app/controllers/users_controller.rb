@@ -26,7 +26,6 @@ class UsersController < ApplicationController
   end
 
   def follow
-
     if current_user.followings.where(following: @user).any?
       current_user.followings.where(following: @user).destroy_all
       @user_status = 'follow'
@@ -38,14 +37,17 @@ class UsersController < ApplicationController
     end
     respond_to do |format|
       format.js
+<<<<<<< HEAD
     end
+=======
+      end
+>>>>>>> 35148dcf5d6e51f37f37d33e3f6a16aa239efa36
   end
     # if  fl.save
     #   # redirect_to  suggested_users_path, notice: "Follow successfully!"
     # else
     #   redirect_to  suggested_users_path, notice: fl.errors.full_messages.join(', ')
     # end
-
 
   def destroy_following
     user = User.find(params[:id])
