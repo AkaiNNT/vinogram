@@ -26,7 +26,6 @@ class UsersController < ApplicationController
   end
 
   def follow
-
     if current_user.followings.where(following: @user).any?
       current_user.followings.where(following: @user).destroy_all
       @user_status = 'follow'
@@ -38,6 +37,7 @@ class UsersController < ApplicationController
     end
       respond_to do |format|
       format.js
+      end
   end
     # if  fl.save
     #   # redirect_to  suggested_users_path, notice: "Follow successfully!"
@@ -45,21 +45,20 @@ class UsersController < ApplicationController
     #   redirect_to  suggested_users_path, notice: fl.errors.full_messages.join(', ')
     # end
 
-
   def destroy_following
     user = User.find(params[:id])
     current_user.followings.where(following_id: user.id).destroy_all
   end
 
-def approve_follower
-  follower = User.find(params[:id])
-  f = current_user.followers.where(follower: follower).last
-  f.status = 'following'
-  if f.save
-  else
-      redirect_to  suggested_users_path, notice: f.errors.full_messages.join(', ')
+  def approve_follower
+    follower = User.find(params[:id])
+    f = current_user.followers.where(follower: follower).last
+    f.status = 'following'
+    if f.save
+    else
+        redirect_to  suggested_users_path, notice: f.errors.full_messages.join(', ')
+    end
   end
-end
 
   def search_navbar
     if params[:search].to_s == ""
@@ -67,12 +66,12 @@ end
     else
       @users = []
       search = params[:search]
-      list = User.where("email || ' ' || full_name || ' ' || contact_number ILIKE ?", "%#{search}%").paginate(:page => params[:page], :per_page => 5)
-      list.each do |u|
-        if u.status == "pub"
-          @users.push(u)
-        end
-      end
+      @users = User.where("email || ' ' || full_name || ' ' || contact_number ILIKE ?", "%#{search}%").paginate(:page => params[:page], :per_page => 5)
+      # list.each do |u|
+      #   if u.status == "pub"
+      #     @users.push(u)
+      #   end
+      # end
     end
   end
 

@@ -23,7 +23,7 @@
       <!-- dropdown notificaiton-->
       <li class="nav-item dropdown mr-0 mr-md-3 mr-lg-4 ">
         <a class="nav-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          <i class="fa fa-heart-o fa-lg" aria-hidden="true"></i>
+          <i class="fa fa-heart-o fa-lg" aria-hidden="true"><span class="badge badge-danger user_notification_count"><%= current_user.followers.where(status: "pending").count%></span></i>
         </a>
         <ul class="dropdown-menu notification">
          <% if current_user.followers.where(status: "pending").any?%>
@@ -43,12 +43,13 @@
                 </div>
               </div>
             </li>
+             <hr>
           <% end %>
         <% else %>
-        <li> You don't have new notifications</li>
+        <li class="no_notification_li"> You don't have new notifications</li>
         <% end %>
 
-        <hr>
+       
 
       </ul>
     </li>
@@ -64,3 +65,10 @@
   </ul>
 </div>
 </div>
+
+<script type="text/javascript">
+  $( "#user_approve_follower_btn" ).click(function() {
+    $( ".list_approve_follower_btn" ).hide();
+    $("#approve_message").show();
+  });
+</script>

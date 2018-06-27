@@ -62,6 +62,12 @@
   .navbar_icon{
   flex-direction: row !important;
 }
+.user_notification_count{
+  font-size: 40% !important;
+}
+.no_notification_li{
+  text-align: center;
+}
 
 .notification{
   left: unset;
@@ -92,6 +98,10 @@
       li {
         padding-left: 20px;
       }
+    }
+
+    .user_notification_count{
+      display: none;
     }
 
   }
