@@ -17,7 +17,7 @@
           </div>
         </td>
         <td>
-          <% if user == current_user %>
+          <% if current_user && user == current_user %>
           <%else %>
             <%if Following.where(following: user, follower: current_user, status: 'pending').any?%>
             <%= button_to "Pending", destroy_following_user_path(user), class: 'btn small-btn btn-warning button button-following', method: :delete, id: "user_follow_" + user.id.to_s , remote: true %>

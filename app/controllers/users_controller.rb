@@ -35,25 +35,19 @@ class UsersController < ApplicationController
       @user_status = fl.status
       fl.save
     end
-    respond_to do |format|
+      respond_to do |format|
       format.js
-    end
+  end
     # if  fl.save
     #   # redirect_to  suggested_users_path, notice: "Follow successfully!"
     # else
     #   redirect_to  suggested_users_path, notice: fl.errors.full_messages.join(', ')
     # end
-  end
+
 
   def destroy_following
     user = User.find(params[:id])
-    if current_user.followings.where(following_id: user.id).destroy_all
-      # redirect_to  suggested_users_path, notice: "Cancel successfully!"
-    else
-     # redirect_to  suggested_users_path, notice: "Cancel fail!"
-     # following = Following.where(following_id: user.id, follower_id: current_user.id)
-    # all_following = current_user.followings 
-    # all_following.delete(following)
+    current_user.followings.where(following_id: user.id).destroy_all
   end
 end
 
@@ -62,10 +56,10 @@ def approve_follower
   f = current_user.followers.where(follower: follower).last
   f.status = 'following'
   if f.save
-    else
+  else
       redirect_to  suggested_users_path, notice: f.errors.full_messages.join(', ')
-    end
   end
+end
 
   def search_navbar
     if params[:search].to_s == ""
