@@ -6,14 +6,14 @@
 					<% post.pictures.each_with_index do |pic, index| %>
 				  	<% if index == 0 %>
 					    <div class="carousel-item active">
-					      <%= image_tag(pic.image.url(:origin), :class => "d-block")%>
+					      <%= image_tag(pic.image.url(:origin), :class => "d-block w-100")%>
 					    </div>
 					  <% else %>
 					    <div class="carousel-item">
-						    <%= image_tag(pic.image.url(:origin), :class => "d-block")%>
+						    <%= image_tag(pic.image.url(:origin), :class => "d-block w-100")%>
 					    </div>
 					  <% end %>
-					<% end %>
+				<% end %>
 			  </div>
 			 	<% if post.pictures.count >= 2 %>
 				  <a class="carousel-control-prev" href="#carousel_<%=post.id%>" role="button" data-slide="prev">

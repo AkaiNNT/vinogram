@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container edit-post">
 	<%= render 'create_post' %>
 </div>
 <script type="text/javascript">
@@ -28,7 +28,7 @@
 
 	document.querySelector("#upload-button").addEventListener('click', function() {
 		document.querySelector("#file-to-upload").click();
-		$("#add-cocoon").addClass("d-none");		
+		$("#add-cocoon").addClass("d-none");
 		$('#video-demo-container').removeClass('d-none');
 		$("#up_video").prop("checked",true);
 		$("#up_image").prop("checked",false);
@@ -43,7 +43,7 @@
 		$("#up_video").prop("checked",false);
 		$("#up_image").prop("checked",true);
 	});
-	
+
 	$(document).ready(function() {
     $("#link-add-pic").
       data("association-insertion-method", 'append').

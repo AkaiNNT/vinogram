@@ -21,7 +21,7 @@ class Post < ApplicationRecord
         strict: :experimental
       }
     }},
-    thumb: {geometry: "100x100#", format:'jpg', time: 1}
+    thumb: {geometry: "500x500#", format:'jpg', time: 1}
   }, processors: [:transcoder]
   validates_attachment_content_type :attachment, content_type: /\Avideo\/.*\Z/
   validates_attachment :attachment, size: {less_than: 130.megabytes}
@@ -34,7 +34,7 @@ class Post < ApplicationRecord
     elsif (!self.pictures.present? && !self.attachment.present? )
       errors.add(:base, "Post must has at least one picture or one video.")
     end
-    
+
   end
 
   def callback_parse_params
@@ -52,5 +52,5 @@ class Post < ApplicationRecord
       errors.add(:base, "Post must has at least one picture or one video.")
     end
   end
-  
+
 end
