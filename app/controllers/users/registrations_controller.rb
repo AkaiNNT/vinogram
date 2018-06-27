@@ -5,7 +5,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # before_action :configure_account_update_params, only: [:update]
   # GET /resource/sign_up
   include Accessible
-  skip_before_action :check_user, only: [ :destroy,:edit ]
+  skip_before_action :check_user, only: [ :destroy,:edit, :update ]
   def new
     super
   end
@@ -16,14 +16,14 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   # GET /resource/edit
-  # def edit
-  #   super
-  # end
+  def edit
+    super
+  end
 
+  def update
+    super
+  end
   # PUT /resource
-  # def update
-  #   super
-  # end
 
   # DELETE /resource
   # def destroy
@@ -39,7 +39,15 @@ class Users::RegistrationsController < Devise::RegistrationsController
   #   super
   # end
 
-  # protected
+  protected
+
+  def after_update_path_for(resource)
+    if resource.class.name.downcase.to_sym == :user
+      edit_user_registration_path
+    else
+      super
+    end
+  end
 
   # If you have extra params to permit, append them to the sanitizer.
   # def configure_sign_up_params

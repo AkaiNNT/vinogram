@@ -5,48 +5,48 @@
       <div class="col-md-3 list">
         <div class="list-group">
           <li class="list-group-item"><%= link_to 'Edit Profile', edit_user_path(@user)%></li>
-          <li class="list-group-item actived"><%= link_to 'Change Password', edit_user_registration_path(@user)%></li>
+          <li class="list-group-item actived"><%= link_to 'Change Password', edit_user_registration_path%></li>
         </div>
       </div>
       <div class="col-md-9 article">
         <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-     <%= f.error_notification %>
-         <div class="form_input">
-        <div class="row row_avatar">
-          <div class="col-md-3 avatar_img">
-          <%= image_tag (@user.avatar.url),id: 'blah'%>
-            <%= f.file_field :avatar, value: 'Edit avatar', id: 'edit_avatar', onchange: "readURL(this);"%>
+        <%= f.error_notification %>
+        <div class="form_input">
+          <div class="row row_avatar">
+            <div class="col-md-3 avatar_img">
+              <%= image_tag (@user.avatar.url),id: 'blah'%>
+              <%= f.file_field :avatar, value: 'Edit avatar', id: 'edit_avatar', onchange: "readURL(this);"%>
+            </div>
+            <div class="col-md-9">
+              <h4><%= @user.full_name %></h4>
+            </div>
+          </div>   
+
+          <div class="row row_input">
+            <div class="col-md-3 pr-0"><%= f.label 'Old Password' , class: 'label'%></div>
+            <div class="col-md-9 "><%= f.input_field :current_password, autocomplete: "off", hint: "we need your current password to confirm your changes", required: true, class: 'input_field' %></div>
           </div>
-          <div class="col-md-9">
-            <h4><%= @user.full_name %></h4>
+          <div class="row row_input">
+            <div class="col-md-3 pr-0"><%= f.label :password, class: 'label'%></div>
+            <div class="col-md-9 "><%= f.input_field :password , hint: "leave it blank if you don't want to change it", required: false, class: 'input_field' %></div>
+          </div>
+          <div class="row row_input">
+            <div class="col-md-3 pr-0"><%= f.label :password_confirmation, class: 'label'%></div>
+            <div class="col-md-9 "><%= f.input_field :password_confirmation, required: false, class: 'input_field' %></div>
+          </div>
+          <div class="row row_input">
+            <div class="col-md-3"></div>
+            <div class="col-md-9">
+             <%= f.button :submit, "Update",  class: 'btn small-btn btn-primary' %>
+           </div>
          </div>
-       </div>   
+       </div>
 
-        <div class="row row_input">
-          <div class="col-md-3 pr-0"><%= f.label 'Old Password' , class: 'label'%></div>
-          <div class="col-md-9 "><%= f.input_field :current_password, autocomplete: "off", hint: "we need your current password to confirm your changes", required: true, class: 'input_field' %></div>
-        </div>
-        <div class="row row_input">
-          <div class="col-md-3 pr-0"><%= f.label :password, class: 'label'%></div>
-          <div class="col-md-9 "><%= f.input_field :password , hint: "leave it blank if you don't want to change it", required: false, class: 'input_field' %></div>
-        </div>
-         <div class="row row_input">
-          <div class="col-md-3 pr-0"><%= f.label :description, class: 'label'%></div>
-          <div class="col-md-9 "><%= f.input_field :password_confirmation, required: false, class: 'input_field' %></div>
-        </div>
-        <div class="row row_input">
-          <div class="col-md-3"></div>
-          <div class="col-md-9">
-             <%= f.button :submit, "Update", class: 'btn small-btn btn-primary' %>
-          </div>
-        </div>
-      </div>
-
-<!--      <%#= link_to "Back", :back %> -->
-      <% end %>
-    </div>
-  </div>
-</div>
+       <!--      <%#= link_to "Back", :back %> -->
+       <% end %>
+     </div>
+   </div>
+ </div>
 </div>
 <script type="text/javascript">
   $( "#blah" ).click(function() {
