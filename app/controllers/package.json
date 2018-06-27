@@ -2,3 +2,7 @@
   "name": "vinogram",
   "dependencies": {}
 }
+"scripts": {
+  "webpack:deploy": "webpack --config=webpack/webpack.config.js -p",
+  "heroku-postbuild": "npm run webpack:deploy"
+},
